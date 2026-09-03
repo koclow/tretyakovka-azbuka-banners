@@ -19,11 +19,10 @@
     display:flex; flex-direction:column;
   }
   .bar{
-    flex:0 0 auto; display:flex; flex-wrap:wrap; align-items:center; gap:10px 22px;
+    flex:0 0 auto; display:flex; flex-wrap:wrap; align-items:center; gap:10px 26px;
     padding:12px 20px; border-bottom:1px solid var(--line);
   }
   .bar .title{ font-weight:600; margin-right:6px; }
-  .bar .title a{ color:var(--accent); text-decoration:none; font-weight:400; margin-left:10px; font-size:13px; }
   .group{ display:flex; align-items:center; gap:8px; }
   .group > span{ font-size:11px; letter-spacing:.08em; text-transform:uppercase; color:var(--muted); }
   .seg{ display:flex; border:1px solid var(--line); border-radius:9px; overflow:hidden; }
@@ -54,7 +53,7 @@
 <body>
 
 <div class="bar">
-  <span class="title">Баннер на странице РБК <a href="../index.html">← к баннерам</a></span>
+  <span class="title">Баннер на странице РБК</span>
 
   <div class="group">
     <span>Экран</span>
@@ -66,40 +65,12 @@
     </div>
   </div>
 
-  <div class="group desk-only">
-    <span>Первый экран</span>
-    <div class="seg" id="top">
-      <button data-v="illo" aria-pressed="true">Иллюстрация</button>
-      <button data-v="photo">Фото</button>
-    </div>
-  </div>
-  <div class="group desk-only">
-    <span>По доскролу</span>
-    <div class="seg" id="more">
-      <button data-v="illo">Иллюстрация</button>
-      <button data-v="photo" aria-pressed="true">Фото</button>
-    </div>
-  </div>
-  <div class="group mob-only" hidden>
-    <span>Первый экран</span>
-    <div class="seg" id="mtop">
-      <button data-v="woman" aria-pressed="true">Женщина</button>
-      <button data-v="man">Мужчина</button>
-    </div>
-  </div>
-  <div class="group mob-only" hidden>
-    <span>По доскролу</span>
-    <div class="seg" id="mmore">
-      <button data-v="woman">Женщина</button>
-      <button data-v="man" aria-pressed="true">Мужчина</button>
-    </div>
-  </div>
-
   <div class="group">
     <span>Показать</span>
     <div class="seg" id="jump">
       <button data-to="top">Первый экран</button>
-      <button data-to="more">Второй билборд ↓</button>
+      <button data-to="more">Второй баннер ↓</button>
+      <button data-to="replay">Проиграть заново</button>
     </div>
   </div>
 
@@ -112,10 +83,11 @@
   </div>
 </div>
 
-<div class="hint">Серым — каркас материала, цветными подписями — рекламные слоты и их настоящие названия.
-  Билборд по ТТ живёт от 680 px (планшет) до 1440 и шире; на мобильном вместо него — отдельный
-  креатив 100%×250 с фотографией. <b>Прокрутите страницу внутри рамки:</b> второй билборд загрузится
-  и начнёт играть, только когда попадёт в экран. Клик по баннеру проигрывает появление заново.</div>
+<div class="hint">Серым — каркас материала, подписями — рекламные слоты и их настоящие названия.
+  На десктопе и планшете: сверху билборд с иллюстрацией, по доскролу — билборд с фото (по ТТ оба от 680 px).
+  На мобильном: креатив 300×250 стоит по центру слота 100%×250, поля — цветом фона; сверху женщина,
+  по доскролу мужчина. <b>Прокрутите страницу внутри рамки:</b> второй баннер загрузится и начнёт играть,
+  только когда попадёт в экран. Клик по баннеру проигрывает появление заново.</div>
 
 <script>
 (function(){
@@ -123,7 +95,7 @@
   var device = document.getElementById('device');
   var frame = document.getElementById('page');
   var readout = document.getElementById('readout');
-  var state = { w:1440, kind:'desk', top:'illo', more:'photo', mtop:'woman', mmore:'man' };
+  var state = { w:1440, kind:'desk' };
 
   function press(groupId, attr, val){
     document.querySelectorAll('#'+groupId+' button').forEach(function(b){
@@ -150,10 +122,7 @@
 
   function load(){
     var st = /[?&]static/.test(location.search) ? '&static=1' : '';
-    frame.src = 'page.html?top=' + state.top + '&more=' + state.more + '&mtop=' + state.mtop + '&mmore=' + state.mmore + '&w=' + state.w + st + '&v=' + Date.now();
-    var mobile = state.kind === 'phone';
-    document.querySelectorAll('.desk-only').forEach(function(g){ g.hidden = mobile; });
-    document.querySelectorAll('.mob-only').forEach(function(g){ g.hidden = !mobile; });
+    frame.src = 'page.html?w=' + state.w + st + '&v=' + Date.now();
   }
 
   document.getElementById('screen').addEventListener('click', function(e){
@@ -161,26 +130,11 @@
     state.w = +b.dataset.w; state.kind = b.dataset.kind;
     press('screen', 'w', String(state.w)); layout(); load();
   });
-  document.getElementById('top').addEventListener('click', function(e){
-    var b = e.target.closest('button'); if (!b) return;
-    state.top = b.dataset.v; press('top', 'v', state.top); load();
-  });
-  document.getElementById('more').addEventListener('click', function(e){
-    var b = e.target.closest('button'); if (!b) return;
-    state.more = b.dataset.v; press('more', 'v', state.more); load();
-  });
-  document.getElementById('mtop').addEventListener('click', function(e){
-    var b = e.target.closest('button'); if (!b) return;
-    state.mtop = b.dataset.v; press('mtop', 'v', state.mtop); load();
-  });
-  document.getElementById('mmore').addEventListener('click', function(e){
-    var b = e.target.closest('button'); if (!b) return;
-    state.mmore = b.dataset.v; press('mmore', 'v', state.mmore); load();
-  });
 
   // Прокрутка внутри рамки — для показа, когда колесо мыши неудобно
   document.getElementById('jump').addEventListener('click', function(e){
     var b = e.target.closest('button'); if (!b) return;
+    if (b.dataset.to === 'replay'){ load(); return; }
     var d = frame.contentDocument; if (!d) return;
     if (b.dataset.to === 'top'){ frame.contentWindow.scrollTo({ top:0, behavior:'smooth' }); return; }
     var el = d.getElementById('slot-more');

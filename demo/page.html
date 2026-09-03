@@ -31,13 +31,15 @@
   .slot-head .name{ color:var(--ink); background:#f2f4f6; border:1px solid var(--line); border-radius:5px; padding:3px 7px; }
   .slot-head .act{ color:#fff; background:var(--tag); border-radius:5px; padding:3px 7px; }
   .slot-head .act.wait{ background:#8a6a1f; }
-  .slot-frame{ border:1px dashed #c8ccd0; }
+  .slot-frame{ border:1px dashed #c8ccd0; background:#184936; }
   .slot-frame iframe{ display:block; border:0; width:100%; }
 
   .cols{ display:flex; gap:32px; align-items:flex-start; margin:32px 0; }
   .main{ flex:1 1 auto; min-width:0; }
   .rail{ flex:0 0 300px; position:sticky; top:16px; }
-  .m-only{ display:none; }
+  .rail .tall{ height:600px; border-radius:6px; background:var(--skeleton); margin-bottom:12px;
+               display:flex; align-items:center; justify-content:center; color:var(--muted);
+               font:500 11px/1.4 ui-monospace, Menlo, monospace; text-align:center; padding:20px; }
 
   h1.title{ font-size:34px; line-height:1.15; letter-spacing:-.02em; margin:0 0 16px; max-width:22ch; }
   .lead{ font-size:18px; color:#3a4046; margin:0 0 24px; max-width:60ch; }
@@ -51,11 +53,10 @@
   .foot{ padding:60px 0 100px; color:var(--muted); font-size:13px; }
   .foot code{ font-size:12.5px; background:#f2f4f6; padding:1px 5px; border-radius:4px; }
 
-  @media (max-width:700px){ .wrap{ padding:0; } }   /* планшет 680: слот во всю ширину */
+  @media (max-width:700px){ .wrap{ padding:0; } .slot-head{ padding:0 8px; } }   /* планшет 680: слот во всю ширину */
   @media (max-width:899px){
-    .cols{ display:block; }
+    .cols{ display:block; padding:0 8px; }
     .rail{ display:none; }
-    .m-only{ display:block; }
     h1.title{ font-size:26px; }
     .photo{ height:220px; }
   }
@@ -75,8 +76,8 @@
   <!-- ——— первый билборд ——— -->
   <div class="slot">
     <div class="slot-head">
-      <span class="name">after_topline_inner</span>
-      <span>билборд 100%×250, первый экран</span>
+      <span class="name" id="name-top">after_topline_inner</span>
+      <span id="desc-top">билборд 100%×250, первый экран</span>
       <span class="act">activation: instant</span>
     </div>
     <div class="slot-frame">
@@ -91,19 +92,6 @@
       <div class="par l"></div><div class="par l"></div><div class="par m"></div>
       <div class="photo"></div>
       <div class="par l"></div><div class="par m"></div><div class="par l"></div><div class="par s"></div>
-
-      <!-- мобильный 300×250 в ленте -->
-      <div class="slot m-only">
-        <div class="slot-head">
-          <span class="name">300×250 mobile</span>
-          <span>в ленте материала</span>
-          <span class="act wait">по доскролу</span>
-        </div>
-        <div class="slot-frame" style="width:300px; margin:0 auto">
-          <iframe src="../banners/300x250/index.html" height="250" scrolling="no" title="Мобильный баннер 300×250"></iframe>
-        </div>
-      </div>
-
       <div class="par l"></div><div class="par l"></div><div class="par m"></div>
       <div class="par l"></div><div class="par s"></div>
       <div class="par l"></div><div class="par m"></div><div class="par l"></div>
@@ -111,19 +99,7 @@
     </div>
 
     <aside class="rail">
-      <div class="slot" style="margin-top:0">
-        <div class="slot-head">
-          <span class="name">right_1_inner</span>
-          <span>правая колонка, 300×600</span>
-          <span class="act wait">on_doscroll</span>
-        </div>
-        <div class="slot-frame" style="height:600px; background:#fafbfc">
-          <iframe src="../banners/300x250/index.html" height="250" scrolling="no" title="Баннер 300×250"></iframe>
-        </div>
-        <div class="slot-head" style="margin-top:8px">
-          <span>в слот 300×600 наш 300×250 встаёт сверху — под 300×600 нужен отдельный макет</span>
-        </div>
-      </div>
+      <div class="tall">right_1_inner · 300×600<br>в этой задаче нет</div>
       <div class="card"></div>
       <div class="card"></div>
     </aside>
@@ -139,12 +115,12 @@
   <!-- ——— второй билборд, по доскролу ——— -->
   <div class="slot">
     <div class="slot-head">
-      <span class="name">after_topline_more_inner</span>
-      <span>билборд в догруженном материале</span>
+      <span class="name" id="name-more">after_topline_more_inner</span>
+      <span id="desc-more">билборд в догруженном материале</span>
       <span class="act wait">activation: on_doscroll, viewableOnly</span>
     </div>
     <div class="slot-frame">
-      <iframe id="slot-more" height="250" scrolling="no" title="Билборд по доскролу" style="background:#184936"></iframe>
+      <iframe id="slot-more" height="250" scrolling="no" title="Билборд по доскролу"></iframe>
     </div>
   </div>
 
@@ -161,27 +137,23 @@
 
 <script>
 (function(){
-  var SRC = {
-    illo:  '../banners/billboard-100x250/index.html',
-    photo: '../banners/billboard-photo-100x250/index.html',
-    woman: '../banners/mobile-100x250-woman/index.html',
-    man:   '../banners/mobile-100x250-man/index.html'
-  };
+  // Кто где стоит — договорённость по умолчанию:
+  // десктоп: сверху иллюстрация, по доскролу фото; мобильный: сверху женщина, по доскролу мужчина.
+  var DESK = ['../banners/billboard-100x250/index.html', '../banners/billboard-photo-100x250/index.html'];
+  var MOB  = ['../banners/mobile-300x250-woman/index.html', '../banners/mobile-300x250-man/index.html'];
   var q = new URLSearchParams(location.search);
   // версия из рамки пробрасывается в креативы — CDN GitHub Pages кэширует каждый URL на 10 минут
   var sfx = (q.get('static') ? '?static&' : '?') + 'v=' + (q.get('v') || '0');
-  var mobile = innerWidth < 680;   // билборд по ТТ — от 680 px; уже — мобильный креатив
-  var top  = mobile ? (SRC[q.get('mtop')]  || SRC.woman) : (SRC[q.get('top')]  || SRC.illo);
-  var more = mobile ? (SRC[q.get('mmore')] || SRC.man)   : (SRC[q.get('more')] || SRC.photo);
+  var mobile = innerWidth < 680;   // билборд по ТТ — от 680 px; уже — мобильный 300×250 в слоте 100%×250
+  var src = mobile ? MOB : DESK;
   if (mobile){
-    document.querySelectorAll('.slot-head .name').forEach(function(n){
-      if (n.textContent === 'after_topline_inner') n.nextElementSibling.textContent = 'мобильный 100%×250, первый экран';
-      if (n.textContent === 'after_topline_more_inner'){ n.textContent = 'after_topline_inner_mobile_more'; n.nextElementSibling.textContent = 'мобильный 100%×250 в догруженном материале'; }
-    });
+    document.getElementById('desc-top').textContent  = 'мобильный слот 100%×250 · креатив 300×250 по центру, поля — цвет фона';
+    document.getElementById('name-more').textContent = 'after_topline_inner_mobile_more';
+    document.getElementById('desc-more').textContent = 'мобильный слот 100%×250 в догруженном материале · креатив 300×250';
   }
 
   // первый экран — сразу
-  document.getElementById('slot-top').src = top + sfx;
+  document.getElementById('slot-top').src = src[0] + sfx;
 
   // «по доскролу»: грузится и играет, когда виден наполовину —
   // так работает activation: on_doscroll + viewableOnly у РБК
@@ -189,7 +161,7 @@
   var loaded = false;
   function show(){
     if (loaded) return; loaded = true;
-    lazy.src = more + sfx;
+    lazy.src = src[1] + sfx;
     window.removeEventListener('scroll', check);
   }
   function check(){

@@ -16,10 +16,9 @@ DIST.mkdir(exist_ok=True)
 BANNERS = {
     "billboard-100x250": "billboard-100x250",
     "billboard-photo-100x250": "billboard-photo-100x250",
-    "mobile-100x250-woman": "mobile-100x250-woman",
-    "mobile-100x250-man": "mobile-100x250-man",
+    "mobile-300x250-woman": "mobile-300x250-woman",
+    "mobile-300x250-man": "mobile-300x250-man",
     "300x250": "banner-300x250",
-    "680x250": "banner-680x250",
 }
 LIMIT_KB = 150
 
