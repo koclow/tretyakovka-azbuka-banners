@@ -83,6 +83,14 @@
     </div>
   </div>
 
+  <div class="group">
+    <span>Показать</span>
+    <div class="seg" id="jump">
+      <button data-to="top">Первый экран</button>
+      <button data-to="more">Второй билборд ↓</button>
+    </div>
+  </div>
+
   <span class="readout" id="readout"></span>
 </div>
 
@@ -143,6 +151,15 @@
   document.getElementById('more').addEventListener('click', function(e){
     var b = e.target.closest('button'); if (!b) return;
     state.more = b.dataset.v; press('more', 'v', state.more); load();
+  });
+
+  // Прокрутка внутри рамки — для показа, когда колесо мыши неудобно
+  document.getElementById('jump').addEventListener('click', function(e){
+    var b = e.target.closest('button'); if (!b) return;
+    var d = frame.contentDocument; if (!d) return;
+    if (b.dataset.to === 'top'){ frame.contentWindow.scrollTo({ top:0, behavior:'smooth' }); return; }
+    var el = d.getElementById('slot-more');
+    if (el) el.scrollIntoView({ behavior:'smooth', block:'center' });
   });
 
   window.addEventListener('resize', layout);
