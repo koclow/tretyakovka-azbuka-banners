@@ -168,7 +168,8 @@
     man:   '../banners/mobile-100x250-man/index.html'
   };
   var q = new URLSearchParams(location.search);
-  var sfx = q.get('static') ? '?static' : '';
+  // версия из рамки пробрасывается в креативы — CDN GitHub Pages кэширует каждый URL на 10 минут
+  var sfx = (q.get('static') ? '?static&' : '?') + 'v=' + (q.get('v') || '0');
   var mobile = innerWidth < 680;   // билборд по ТТ — от 680 px; уже — мобильный креатив
   var top  = mobile ? (SRC[q.get('mtop')]  || SRC.woman) : (SRC[q.get('top')]  || SRC.illo);
   var more = mobile ? (SRC[q.get('mmore')] || SRC.man)   : (SRC[q.get('more')] || SRC.photo);
