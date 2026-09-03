@@ -136,7 +136,7 @@
   }
 
   function load(){
-    frame.src = 'page.html?top=' + state.top + '&more=' + state.more + '&w=' + state.w;
+    frame.src = 'page.html?top=' + state.top + '&more=' + state.more + '&w=' + state.w + '&v=' + Date.now();
   }
 
   document.getElementById('screen').addEventListener('click', function(e){

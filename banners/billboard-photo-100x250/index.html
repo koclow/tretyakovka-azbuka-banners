@@ -94,6 +94,10 @@
     }, { threshold:.5 });
     io.observe(b);
     document.addEventListener('visibilitychange', function(){ if (!document.hidden) start(); });
+    // В фоновой вкладке наблюдатель и события молчат. Слот РБК сам вставляет
+    // креатив, когда его пора показывать, поэтому через полторы секунды играем
+    // в любом случае — пустой зелёный прямоугольник хуже.
+    setTimeout(start, 1500);
   } else { start(); }
   b.addEventListener('click', function(){
     b.classList.remove('play'); void b.offsetWidth; b.classList.add('play');

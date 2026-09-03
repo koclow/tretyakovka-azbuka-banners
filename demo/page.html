@@ -193,7 +193,10 @@
   // Страховка на случай фоновой вкладки, где наблюдатель молчит:
   // проверяем положение слота на каждой прокрутке и при возвращении во вкладку.
   window.addEventListener('scroll', check, { passive:true });
+  window.addEventListener('wheel', check, { passive:true });
+  window.addEventListener('touchmove', check, { passive:true });
   document.addEventListener('visibilitychange', check);
+  var poll = setInterval(function(){ if (loaded) clearInterval(poll); else check(); }, 700);
   check();
 })();
 </script>
