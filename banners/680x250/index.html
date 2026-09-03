@@ -35,15 +35,6 @@
   .h2     { left:3.5784%; top:36.5332%; width:18.7254%; height:8.4%; }
   .logo   { left:3.3824%; top:72%;      width:18.0882%; height:16%; }
 
-  /* ——— резиновый режим (?mode=fluid): текст слева, иллюстрация справа,
-         зелёное поле между ними тянется. Ниже 680 не сжимается. ——— */
-  .is-fluid{ aspect-ratio:auto; height:250px; min-width:680px; }
-  .is-fluid .art   { left:auto; right:7.667px; width:425.333px; }
-  .is-fluid .badge { left:23px;     top:30px;     width:216px;     height:25px; }
-  .is-fluid .h1    { left:23.667px; top:60px;     width:271.333px; height:26.333px; }
-  .is-fluid .h2    { left:24.333px; top:91.333px; width:127.333px; height:21px; }
-  .is-fluid .logo  { left:23px;     top:180px;    width:123px;     height:40px; }
-
   /* ——— появление: всё на месте к 1.1 с ——— */
   .play .horse { animation:slideIn .72s var(--ease-out) .10s both; }
   .play .disc  { animation:popIn   .66s var(--ease-out) .20s both; }
@@ -92,9 +83,6 @@
 </div>
 <script>
   var b = document.getElementById('banner');
-
-  // ?mode=fluid — резиновый режим для сетки
-  if (/[?&]mode=fluid/.test(location.search)) b.classList.add('is-fluid');
 
   // клик — проиграть появление заново
   b.addEventListener('click', function(){

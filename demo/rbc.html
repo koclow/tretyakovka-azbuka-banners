@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Баннер в слотах РБК — схема страницы</title>
+<style>
+  :root{
+    --ink:#16181a;
+    --muted:#8a9099;
+    --line:#e6e8ea;
+    --skeleton:#eceef0;
+    --skeleton-2:#e2e5e8;
+    --tag:#0b6b4f;
+    --page:#fff;
+  }
+  *{ box-sizing:border-box; }
+  html,body{ margin:0; padding:0; }
+  body{
+    background:var(--page); color:var(--ink);
+    font:400 15px/1.55 -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  .explain{
+    position:sticky; top:0; z-index:20;
+    background:#101211; color:#f2f4f2; padding:12px 20px;
+    display:flex; gap:16px; align-items:center; flex-wrap:wrap;
+    font-size:13px;
+  }
+  .explain b{ font-weight:600; }
+  .explain a{ color:#c7a15e; text-decoration:none; border-bottom:1px solid rgba(199,161,94,.4); }
+
+  /* каркас страницы — намеренно серые заглушки, не копия дизайна РБК */
+  .topline{ border-bottom:1px solid var(--line); padding:14px 0; }
+  .wrap{ max-width:1424px; margin:0 auto; padding:0 8px; }
+  .navrow{ display:flex; gap:10px; align-items:center; }
+  .navrow i{ display:block; height:12px; border-radius:3px; background:var(--skeleton); }
+
+  .slot{ margin:24px 0; }
+  .slot-head{
+    display:flex; align-items:center; gap:10px; flex-wrap:wrap;
+    margin-bottom:8px; font:500 11.5px/1.3 ui-monospace, SFMono-Regular, Menlo, monospace;
+    letter-spacing:.02em; color:var(--muted);
+  }
+  .slot-head .name{ color:var(--ink); background:#f2f4f6; border:1px solid var(--line); border-radius:5px; padding:3px 7px; }
+  .slot-head .act{ color:#fff; background:var(--tag); border-radius:5px; padding:3px 7px; }
+  .slot-head .act.wait{ background:#8a6a1f; }
+  .slot-frame{ border:1px dashed #c8ccd0; }
+  .slot-frame iframe{ display:block; border:0; width:100%; }
+
+  .cols{ display:flex; gap:32px; align-items:flex-start; margin:32px 0; }
+  .main{ flex:1 1 auto; min-width:0; }
+  .rail{ flex:0 0 300px; position:sticky; top:64px; }
+
+  h1.title{ font-size:34px; line-height:1.15; letter-spacing:-.02em; margin:0 0 16px; max-width:22ch; }
+  .lead{ font-size:18px; color:#3a4046; margin:0 0 24px; max-width:60ch; }
+  .par{ height:14px; border-radius:3px; background:var(--skeleton); margin:10px 0; }
+  .par.s{ width:62%; } .par.m{ width:88%; } .par.l{ width:100%; }
+  .photo{ height:320px; border-radius:6px; background:var(--skeleton-2); margin:22px 0; }
+  .rail .card{ height:120px; border-radius:6px; background:var(--skeleton); margin-bottom:12px; }
+
+  .divider{ border:0; border-top:1px solid var(--line); margin:40px 0 8px; }
+  .next-label{ font:500 11.5px/1 ui-monospace, Menlo, monospace; color:var(--muted); margin-bottom:20px; }
+
+  .foot{ padding:60px 0 100px; color:var(--muted); font-size:13px; }
+  .foot code{ font-size:12.5px; background:#f2f4f6; padding:1px 5px; border-radius:4px; }
+
+  @media (max-width:900px){
+    .cols{ display:block; }
+    .rail{ position:static; width:300px; max-width:100%; margin-top:32px; }
+    h1.title{ font-size:26px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="explain">
+  <b>Схема страницы РБК.</b>
+  Серым — каркас материала, цветными подписями — рекламные слоты и их реальные названия.
+  Прокрутите вниз: второй билборд начнёт играть, только когда попадёт в экран.
+  <a href="../index.html">← к баннерам</a>
+</div>
+
+<div class="topline">
+  <div class="wrap navrow">
+    <i style="width:96px"></i><i style="width:64px"></i><i style="width:88px"></i>
+    <i style="width:72px"></i><i style="width:110px"></i><i style="width:56px; margin-left:auto"></i>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <!-- ——— первый билборд ——— -->
+  <div class="slot">
+    <div class="slot-head">
+      <span class="name">after_topline_inner</span>
+      <span>билборд 100%×250, первый экран</span>
+      <span class="act">activation: instant</span>
+    </div>
+    <div class="slot-frame">
+      <iframe src="../banners/billboard-100x250/index.html" height="250" scrolling="no" title="Билборд, первый экран"></iframe>
+    </div>
+  </div>
+
+  <div class="cols">
+    <div class="main">
+      <h1 class="title">Заголовок материала занимает две-три строки</h1>
+      <p class="lead">Лид материала — пара предложений о том, про что текст. Дальше идёт обычная статья.</p>
+      <div class="par l"></div><div class="par l"></div><div class="par m"></div>
+      <div class="photo"></div>
+      <div class="par l"></div><div class="par m"></div><div class="par l"></div><div class="par s"></div>
+      <div class="par l"></div><div class="par l"></div><div class="par m"></div>
+      <div class="par l"></div><div class="par s"></div>
+      <div class="par l"></div><div class="par m"></div><div class="par l"></div>
+      <div class="par l"></div><div class="par m"></div><div class="par s"></div>
+    </div>
+
+    <aside class="rail">
+      <div class="slot">
+        <div class="slot-head">
+          <span class="name">right_1_inner</span>
+          <span>правая колонка, 300×600</span>
+          <span class="act wait">activation: on_doscroll</span>
+        </div>
+        <div class="slot-frame" style="height:600px; display:flex; align-items:flex-start; background:#fafbfc">
+          <iframe src="../banners/300x250/index.html" height="250" scrolling="no" title="Баннер 300×250"></iframe>
+        </div>
+        <div class="slot-head" style="margin-top:8px">
+          <span>в слот 300×600 наш 300×250 встаёт сверху — под 300×600 нужен отдельный макет</span>
+        </div>
+      </div>
+      <div class="card"></div>
+      <div class="card"></div>
+    </aside>
+  </div>
+
+  <hr class="divider">
+  <div class="next-label">↓ дальше подгружается следующий материал</div>
+
+  <div class="par l"></div><div class="par m"></div><div class="par l"></div>
+  <div class="par l"></div><div class="par s"></div><div class="par l"></div>
+  <div class="par m"></div><div class="par l"></div><div class="par l"></div>
+
+  <!-- ——— второй билборд, по доскролу ——— -->
+  <div class="slot">
+    <div class="slot-head">
+      <span class="name">after_topline_more_inner</span>
+      <span>тот же билборд в догруженном материале</span>
+      <span class="act wait">activation: on_doscroll, viewableOnly</span>
+    </div>
+    <div class="slot-frame">
+      <iframe data-src="../banners/billboard-100x250/index.html" height="250" scrolling="no"
+              title="Билборд по доскролу" style="background:#184936"></iframe>
+    </div>
+  </div>
+
+  <div class="par l"></div><div class="par m"></div><div class="par l"></div>
+  <div class="par l"></div><div class="par s"></div>
+
+  <div class="foot">
+    Названия слотов взяты со страницы материала РБК: в разметке каждый слот помечен
+    <code>data-role="fox-tail"</code> и <code>data-unit="&lt;имя слота&gt;"</code>, а список слотов
+    с режимами активации лежит в конфиге страницы (<code>bannersConfig</code>).
+    На десктопе 1440 px слот <code>after_topline_inner</code> имеет ширину 1424 px при высоте 250.
+  </div>
+</div>
+
+<script>
+  // «По доскролу»: слот грузится и начинает играть, когда его видно наполовину —
+  // ровно так работает activation: on_doscroll + viewableOnly у РБК.
+  var lazy = document.querySelectorAll('iframe[data-src]');
+  if ('IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if (e.isIntersecting){
+          var f = e.target;
+          if (!f.src){ f.src = f.dataset.src; }
+          io.unobserve(f);
+        }
+      });
+    }, { threshold:.5 });
+    lazy.forEach(function(f){ io.observe(f); });
+  } else {
+    lazy.forEach(function(f){ f.src = f.dataset.src; });
+  }
+</script>
+</body>
+</html>
