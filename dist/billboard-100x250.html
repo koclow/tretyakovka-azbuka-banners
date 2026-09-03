@@ -39,12 +39,16 @@
   /* логотип: до 900 px — макетный, в две строки; дальше — в строку, как в макете 1440 */
   @media (min-width:900px){ .logo-st{ display:none; } .logo-ln{ display:block; } }
 
-  /* ——— узкий слот (< 680): только набор, по центру ——— */
+  /* ——— слот чуть уже 680 (у РБК гуттеры съедают 16 px): макет 680 по центру, края подрезаются ——— */
   .m{ display:none; }
   @media (max-width:679.98px){
+    .box{ left:50%; right:auto; transform:translateX(-50%); width:680px; }
+  }
+  /* ——— совсем узкий (< 600): только набор, по центру ——— */
+  @media (max-width:599.98px){
     .wide{ display:none; }
     .m{ display:block; }
-    .box{ left:50%; right:auto; transform:translateX(-50%); width:300px; }
+    .box{ width:300px; }
     .m.headline{ left:24px; top:74px; width:252px; }
     .m.logo-st { left:24px; top:174px; width:123px; }
   }

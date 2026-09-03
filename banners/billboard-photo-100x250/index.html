@@ -27,9 +27,14 @@
   .photo{ position:absolute; top:0; bottom:0; right:0; left:58.333%; overflow:hidden; }
   .photo img{ display:block; width:100%; height:100%; object-fit:cover; object-position:45% 50%; }
 
+  /* слот чуть уже 680 — макет 680 по центру, края подрезаются */
   @media (max-width:679.98px){
+    .box{ left:50%; right:auto; transform:translateX(-50%); width:680px; }
+  }
+  /* совсем узкий (< 600) — только панель с набором */
+  @media (max-width:599.98px){
     .photo{ display:none; }
-    .box{ left:50%; right:auto; transform:translateX(-50%); width:300px; }
+    .box{ width:300px; }
     .headline{ left:24px; top:74px; width:252px; }
     .lockup  { left:24px; top:174px; width:220px; }
   }
