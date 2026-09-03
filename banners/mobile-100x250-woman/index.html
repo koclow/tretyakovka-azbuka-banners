@@ -48,7 +48,9 @@
 <script>
   var b = document.getElementById('banner'), started = false;
   function start(){ if (started) return; started = true; b.classList.add('play'); }
-  if ('IntersectionObserver' in window){
+  // ?static — финальный кадр без появления: для скриншотов и заглушки
+  if (/[?&]static/.test(location.search)){ started = true; }
+  else if ('IntersectionObserver' in window){
     var io = new IntersectionObserver(function(e){ if (e[0].isIntersecting){ start(); io.disconnect(); } }, { threshold:.5 });
     io.observe(b);
     document.addEventListener('visibilitychange', function(){ if (!document.hidden) start(); });

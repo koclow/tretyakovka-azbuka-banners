@@ -167,6 +167,7 @@
     man:   '../banners/mobile-100x250-man/index.html'
   };
   var q = new URLSearchParams(location.search);
+  var sfx = q.get('static') ? '?static' : '';
   var mobile = innerWidth < 680;   // билборд по ТТ — от 680 px; уже — мобильный креатив
   var top  = mobile ? (SRC[q.get('mtop')]  || SRC.woman) : (SRC[q.get('top')]  || SRC.illo);
   var more = mobile ? (SRC[q.get('mmore')] || SRC.man)   : (SRC[q.get('more')] || SRC.photo);
@@ -178,7 +179,7 @@
   }
 
   // первый экран — сразу
-  document.getElementById('slot-top').src = top;
+  document.getElementById('slot-top').src = top + sfx;
 
   // «по доскролу»: грузится и играет, когда виден наполовину —
   // так работает activation: on_doscroll + viewableOnly у РБК
@@ -186,7 +187,7 @@
   var loaded = false;
   function show(){
     if (loaded) return; loaded = true;
-    lazy.src = more;
+    lazy.src = more + sfx;
     window.removeEventListener('scroll', check);
   }
   function check(){

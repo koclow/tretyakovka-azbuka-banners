@@ -9,13 +9,14 @@
     --green:#184936;
     --ease-out:cubic-bezier(.16,1,.3,1);      /* мягкий длинный выход — премиальный темп */
     --ease-calm:cubic-bezier(.37,0,.63,1);
-    --d:calc(100% - 680px);                   /* «сколько мы шире минимума» — на нём вся интерполяция */
   }
   *{ margin:0; padding:0; box-sizing:border-box; }
   html,body{ width:100%; height:100%; background:var(--green); overflow:hidden; }
   .banner{ position:relative; width:100%; height:250px; background:var(--green); overflow:hidden;
            cursor:pointer; user-select:none; -webkit-tap-highlight-color:transparent; }
-  .box{ position:absolute; left:0; right:0; top:0; height:100%; margin:0 auto; max-width:1440px; }
+  .box{ position:absolute; left:0; right:0; top:0; height:100%; margin:0 auto; max-width:1440px;
+        container-type:inline-size;
+        --d:calc(100cqw - 680px); }   /* «сколько мы шире минимума» — ширина коробки, не высота */
   .lay{ position:absolute; }
   .lay > img{ display:block; width:100%; height:auto; }
 
@@ -34,7 +35,7 @@
   .couple{ left:calc(576.333px + var(--d) * .9114);  top:calc(64px - var(--d) * .06316);      width:calc(96px + var(--d) * .06); }
 
   /* заголовок растёт только после 960 px — иначе к 800 px упирается в голову коня */
-  @media (min-width:960px){ .headline{ width:calc(272px + (100% - 960px) * .46771); } }
+  @media (min-width:960px){ .headline{ width:calc(272px + (100cqw - 960px) * .46771); } }
   /* логотип: до 900 px — макетный, в две строки; дальше — в строку, как в макете 1440 */
   @media (min-width:900px){ .logo-st{ display:none; } .logo-ln{ display:block; } }
 
@@ -94,7 +95,9 @@
 <script>
   var b = document.getElementById('banner'), started = false;
   function start(){ if (started) return; started = true; b.classList.add('play'); }
-  if ('IntersectionObserver' in window){
+  // ?static — финальный кадр без появления: для скриншотов и заглушки
+  if (/[?&]static/.test(location.search)){ started = true; }
+  else if ('IntersectionObserver' in window){
     var io = new IntersectionObserver(function(e){ if (e[0].isIntersecting){ start(); io.disconnect(); } }, { threshold:.5 });
     io.observe(b);
     document.addEventListener('visibilitychange', function(){ if (!document.hidden) start(); });

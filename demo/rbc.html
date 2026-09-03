@@ -149,7 +149,8 @@
   }
 
   function load(){
-    frame.src = 'page.html?top=' + state.top + '&more=' + state.more + '&mtop=' + state.mtop + '&mmore=' + state.mmore + '&w=' + state.w + '&v=' + Date.now();
+    var st = /[?&]static/.test(location.search) ? '&static=1' : '';
+    frame.src = 'page.html?top=' + state.top + '&more=' + state.more + '&mtop=' + state.mtop + '&mmore=' + state.mmore + '&w=' + state.w + st + '&v=' + Date.now();
     var mobile = state.kind === 'phone';
     document.querySelectorAll('.desk-only').forEach(function(g){ g.hidden = mobile; });
     document.querySelectorAll('.mob-only').forEach(function(g){ g.hidden = !mobile; });
