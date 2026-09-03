@@ -174,12 +174,27 @@
   // «по доскролу»: грузится и играет, когда виден наполовину —
   // так работает activation: on_doscroll + viewableOnly у РБК
   var lazy = document.getElementById('slot-more');
+  var loaded = false;
+  function show(){
+    if (loaded) return; loaded = true;
+    lazy.src = more;
+    window.removeEventListener('scroll', check);
+  }
+  function check(){
+    var r = lazy.getBoundingClientRect();
+    if (r.top < innerHeight * .75 && r.bottom > innerHeight * .25) show();
+  }
   if ('IntersectionObserver' in window){
     var io = new IntersectionObserver(function(es){
-      if (es[0].isIntersecting){ lazy.src = more; io.disconnect(); }
+      if (es[0].isIntersecting){ show(); io.disconnect(); }
     }, { threshold:.5 });
     io.observe(lazy);
-  } else { lazy.src = more; }
+  }
+  // Страховка на случай фоновой вкладки, где наблюдатель молчит:
+  // проверяем положение слота на каждой прокрутке и при возвращении во вкладку.
+  window.addEventListener('scroll', check, { passive:true });
+  document.addEventListener('visibilitychange', check);
+  check();
 })();
 </script>
 </body>
