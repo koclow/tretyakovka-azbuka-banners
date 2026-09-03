@@ -15,6 +15,7 @@ DIST.mkdir(exist_ok=True)
 
 BANNERS = {
     "billboard-100x250": "billboard-100x250",
+    "billboard-photo-100x250": "billboard-photo-100x250",
     "300x250": "banner-300x250",
     "680x250": "banner-680x250",
 }
@@ -26,7 +27,8 @@ for folder, name in BANNERS.items():
 
     def inline(m):
         data = (src.parent / "assets" / m.group(1)).read_bytes()
-        return 'src="data:image/png;base64,%s"' % base64.b64encode(data).decode()
+        mime = "image/jpeg" if m.group(1).endswith(".jpg") else "image/png"
+        return 'src="data:%s;base64,%s"' % (mime, base64.b64encode(data).decode())
 
     single = DIST / f"{name}.html"
     single.write_text(re.sub(r'src="assets/([^"]+)"', inline, html), encoding="utf-8")

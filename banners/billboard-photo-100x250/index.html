@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Соберите коллекцию шедевров — билборд 100%×250, фото</title>
+<style>
+  :root{
+    --green:#184936;
+    --ease-out:cubic-bezier(.23,1,.32,1);
+    --ease-calm:cubic-bezier(.37,0,.63,1);
+  }
+  *{ margin:0; padding:0; box-sizing:border-box; }
+  html,body{ width:100%; height:100%; background:var(--green); overflow:hidden; }
+
+  .banner{
+    position:relative; width:100%; height:250px;
+    background:var(--green); overflow:hidden;
+    cursor:pointer; user-select:none; -webkit-tap-highlight-color:transparent;
+  }
+  .box{
+    position:absolute; left:0; right:0; top:0; height:100%;
+    margin:0 auto; max-width:1600px;
+  }
+  .lay{ position:absolute; }
+  .lay > img{ display:block; width:100%; height:100%; }
+
+  /* Зелёная панель с набором из макета 1200×400, уменьшенного до высоты 250.
+     Панель чуть растёт вместе со слотом (375 → 520), кегль не меняется. */
+  .panel{ position:absolute; left:0; top:0; height:100%; width:100%; }
+  .p1    { left:58.958px; top:40.833px;  width:204.792px; height:40.833px; }
+  .p2    { left:60px;     top:88.333px;  width:224.167px; height:28.333px; }
+  .p3    { left:60px;     top:127.083px; width:205.417px; height:32.083px; }
+  .plogo { left:57.5px;   top:185.625px; width:264.167px; height:40px; }
+
+  /* Фото занимает всё справа от панели и кадрируется под ширину:
+     чем шире слот, тем крупнее план на значках. */
+  .photo{ position:absolute; top:0; bottom:0; right:0; left:375px; overflow:hidden; display:none; }
+  .photo img{
+    display:block; width:100%; height:100%;
+    object-fit:cover; object-position:60% 55%;
+  }
+
+  /* ——— узкий слот (мобильный 100%×250): только панель, по центру ——— */
+  .box{ left:50%; right:auto; transform:translateX(-50%); width:375px; }
+
+  @media (min-width:680px){
+    .box{ left:0; right:0; transform:none; width:auto; }
+    .panel{ width:clamp(375px, 30%, 520px); }
+    .photo{ display:block; left:clamp(375px, 30%, 520px); }
+  }
+
+  /* ——— появление ——— */
+  .play .photo { animation:photoIn .9s var(--ease-out) .05s both; }
+  .play .p1    { animation:riseIn .58s var(--ease-out) .14s both; }
+  .play .p2    { animation:riseIn .58s var(--ease-out) .21s both; }
+  .play .p3    { animation:riseIn .58s var(--ease-out) .28s both; }
+  .play .plogo { animation:riseIn .60s var(--ease-out) .46s both; }
+
+  @keyframes riseIn { from{ opacity:0; transform:translateY(42%); } to{ opacity:1; transform:none; } }
+  @keyframes photoIn{ from{ opacity:0; } to{ opacity:1; } }
+
+  /* ——— покой: медленный наезд на фото ——— */
+  .photo img{ animation:kenburns 16s var(--ease-calm) 1s infinite alternate; transform-origin:60% 55%; }
+  @keyframes kenburns{ from{ transform:scale(1); } to{ transform:scale(1.06); } }
+
+  @media (prefers-reduced-motion:reduce){
+    .play .lay, .play .photo, .photo img{ animation:none !important; transform:none !important; opacity:1 !important; }
+    .play{ animation:softIn .3s ease both; }
+    @keyframes softIn{ from{ opacity:0; } to{ opacity:1; } }
+  }
+</style>
+</head>
+<body>
+<div class="banner" id="banner" role="img"
+     aria-label="Азбука вкуса. Соберите коллекцию шедевров">
+  <div class="box">
+    <div class="panel">
+      <div class="lay p1"><img src="assets/p1.png" alt=""></div>
+      <div class="lay p2"><img src="assets/p2.png" alt=""></div>
+      <div class="lay p3"><img src="assets/p3.png" alt=""></div>
+      <div class="lay plogo"><img src="assets/plogo.png" alt=""></div>
+    </div>
+    <div class="photo"><img src="assets/photo.jpg" alt=""></div>
+  </div>
+</div>
+<script>
+  var b = document.getElementById('banner');
+  var started = false;
+  function start(){ if (started) return; started = true; b.classList.add('play'); }
+  if ('IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(e){
+      if (e[0].isIntersecting){ start(); io.disconnect(); }
+    }, { threshold:.5 });
+    io.observe(b);
+    document.addEventListener('visibilitychange', function(){ if (!document.hidden) start(); });
+  } else { start(); }
+  b.addEventListener('click', function(){
+    b.classList.remove('play'); void b.offsetWidth; b.classList.add('play');
+  });
+</script>
+</body>
+</html>

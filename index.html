@@ -147,11 +147,20 @@
   </header>
 
   <section>
-    <h2 class="section">Билборд 100%×250</h2>
+    <h2 class="section">Билборд 100%×250 — два варианта</h2>
     <p class="section-note">Главный формат. В слоте РБК <code>after_topline_inner</code> на десктопе
-      1440 px это <b>1424×250</b>. Здесь показан во всю ширину страницы.</p>
-    <div class="frame" style="height:250px">
-      <iframe id="fbb" src="banners/billboard-100x250/index.html" scrolling="no" title="Билборд 100%×250"></iframe>
+      1440 px это <b>1424×250</b>. Здесь оба показаны во всю ширину страницы.</p>
+    <div class="slot" style="margin-bottom:28px">
+      <h3>А — иллюстрация <span class="chip">100% × 250</span></h3>
+      <div class="frame" style="height:250px">
+        <iframe id="fbb" src="banners/billboard-100x250/index.html" scrolling="no" title="Билборд, иллюстрация"></iframe>
+      </div>
+    </div>
+    <div class="slot">
+      <h3>Б — фото <span class="chip">100% × 250</span></h3>
+      <div class="frame" style="height:250px">
+        <iframe id="fbp" src="banners/billboard-photo-100x250/index.html" scrolling="no" title="Билборд, фото"></iframe>
+      </div>
     </div>
   </section>
 
@@ -176,7 +185,8 @@
     <div class="actions">
       <button class="plain" id="replay">Проиграть заново</button>
       <span class="hint">Отдельно:
-        <a href="banners/billboard-100x250/index.html">билборд</a> ·
+        <a href="banners/billboard-100x250/index.html">билборд А</a> ·
+        <a href="banners/billboard-photo-100x250/index.html">билборд Б</a> ·
         <a href="banners/680x250/index.html">680×250</a> ·
         <a href="banners/300x250/index.html">300×250</a>
       </span>
@@ -195,7 +205,8 @@
         <div class="group">
           <span>Баннер</span>
           <div class="seg" id="pick">
-            <button data-banner="bb" aria-pressed="true">Билборд 100%×250</button>
+            <button data-banner="bb" aria-pressed="true">Билборд А</button>
+            <button data-banner="bp" aria-pressed="false">Билборд Б</button>
             <button data-banner="300" aria-pressed="false">300 × 250</button>
           </div>
         </div>
@@ -216,8 +227,9 @@
 
   <section>
     <h2 class="section">Как это стоит на странице</h2>
-    <p class="section-note">Схема материала РБК с настоящими названиями слотов: первый билборд играет
-      сразу, второй — только когда его увидели. Прокрутите страницу и посмотрите, как он стартует.</p>
+    <p class="section-note">Схема материала РБК с настоящими названиями слотов. Переключатели экрана —
+      мобильный, планшет, три ширины десктопа; в каждый из двух билбордов можно поставить любой вариант.
+      Первый играет сразу, второй — только когда его увидели.</p>
     <div class="actions" style="margin-top:0">
       <a class="plain" href="demo/rbc.html" style="text-decoration:none">Открыть схему страницы →</a>
     </div>
@@ -246,7 +258,7 @@
       <tr><th>Требование</th><th>Что у нас</th><th></th></tr>
       <tr><td>Билборд растягивается на 100%, корректен при 680–1440 px и шире</td><td>680 px — ровно макет, дальше композиция разъезжается, после 1600 px поля фоновым цветом</td><td class="ok">✓</td></tr>
       <tr><td>Мобильный слот 100%×250</td><td>тот же файл: до 680 px показывает квадратную раскладку 300×250 в натуральную величину по центру</td><td class="ok">✓</td></tr>
-      <tr><td>Архив HTML ≤ 150 КБ</td><td>билборд 93 КБ (в нём обе раскладки), мобильный 19 КБ</td><td class="ok">✓</td></tr>
+      <tr><td>Архив HTML ≤ 150 КБ</td><td>билборд А — 94 КБ, билборд Б — 119 КБ, мобильный — 19 КБ</td><td class="ok">✓</td></tr>
       <tr><td>Заглушка 680×250 ≤ 85 КБ</td><td><a href="fallback/banner-680x250.jpg" style="color:inherit">54 КБ</a></td><td class="ok">✓</td></tr>
       <tr><td>Заглушка 300×250 ≤ 65 КБ</td><td><a href="fallback/banner-300x250.jpg" style="color:inherit">19 КБ</a></td><td class="ok">✓</td></tr>
       <tr><td>Пустые поля — основным цветом баннера</td><td>фон <code>#184936</code> залит на всю ширину слота</td><td class="ok">✓</td></tr>
@@ -275,6 +287,13 @@
            '(мобильный слот 100%×250), поля добираются фоном. От 680 px кегль замирает: текст у левого ' +
            'края, пара у правого, круг между ними. ' +
            'Ассеты втрое крупнее нужного, поэтому картинка резкая на любой ширине и на ретине.'
+    },
+    'bp': {
+      src:'banners/billboard-photo-100x250/index.html', w:1000, h:250, fixedHeight:true,
+      min:320, max:1920, presets:[360, 680, 1024, 1424, 1920],
+      note:'<b>Билборд с фото.</b> Зелёная панель с набором держит левый край и чуть растёт ' +
+           '(375 → 520 px), кегль не меняется. Фото занимает всё остальное и кадрируется под ширину: ' +
+           'чем шире слот, тем крупнее план на значках. До 680 px — только панель по центру.'
     },
     '300': {
       src:'banners/300x250/index.html', w:300, h:250, fixedHeight:false,
@@ -334,7 +353,7 @@
   if (window.ResizeObserver) new ResizeObserver(sync).observe(stage);
 
   document.getElementById('replay').addEventListener('click', function(){
-    ['fbb','f680','f300','demo'].forEach(function(id){
+    ['fbb','fbp','f680','f300','demo'].forEach(function(id){
       var f = document.getElementById(id);
       if (f) f.contentWindow.location.reload();
     });
