@@ -221,6 +221,7 @@
   var note    = document.getElementById('note');
 
   var state = { banner:'680', mode:'scale' };
+  var pending = null;   // ширина, которую надо выставить после пересчёта границ слайдера
 
   var CONF = {
     '680': {
@@ -286,7 +287,8 @@
     if (reload){
       demo.src = c.src + (state.mode === 'fluid' ? '?mode=fluid' : '');
     }
-    setWidth(+range.value);
+    setWidth(pending !== null ? pending : +range.value);
+    pending = null;
   }
 
   function setWidth(w){
@@ -309,7 +311,7 @@
   document.getElementById('pick').addEventListener('click', function(e){
     var b = e.target.closest('button'); if (!b) return;
     state.banner = b.dataset.banner;
-    range.value = CONF[state.banner].w;
+    pending = CONF[state.banner].w;   // не через range.value: старые min/max его обрежут
     apply(true);
   });
   document.getElementById('mode').addEventListener('click', function(e){
