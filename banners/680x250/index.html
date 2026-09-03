@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=680">
+<title>Соберите коллекцию шедевров — 680×250</title>
+<style>
+  :root{ --green:#184936; }
+  *{ margin:0; padding:0; box-sizing:border-box; }
+  html,body{ width:680px; height:250px; background:var(--green); overflow:hidden; }
+
+  .banner{
+    position:relative; width:680px; height:250px;
+    background:var(--green); overflow:hidden;
+    cursor:pointer; user-select:none; -webkit-tap-highlight-color:transparent;
+  }
+  .lay{ position:absolute; will-change:transform,opacity; }
+  .lay > img{ display:block; width:100%; height:100%; }
+
+  /* ——— геометрия слоёв: 1:1 с макетом ——— */
+  .horse  { left:247px;      top:100.667px; width:203.333px; height:149.333px; }
+  .disc   { left:400px;      top:0;         width:183px;     height:148px;
+            transform-origin:91.5px 56.5px; }
+  .couple { left:576.333px;  top:64px;      width:96px;      height:186px; }
+  .badge  { left:23px;       top:30px;      width:216px;     height:25px; }
+  .h1     { left:23.667px;   top:60px;      width:271.333px; height:26.333px; }
+  .h2     { left:24.333px;   top:91.333px;  width:127.333px; height:21px; }
+  .logo   { left:23px;       top:180px;     width:123px;     height:40px; }
+
+  /* ——— появление ——— */
+  .play .lay{ animation-fill-mode:both; animation-timing-function:cubic-bezier(.22,.7,.25,1); }
+  .play .horse { animation:slideL .95s .15s; }
+  .play .disc  { animation:popIn  .90s .30s; }
+  .play .couple{ animation:slideL .90s .46s; }
+  .play .badge { animation:riseIn .60s .22s; }
+  .play .h1    { animation:riseIn .70s .36s; }
+  .play .h2    { animation:riseIn .70s .48s; }
+  .play .logo  { animation:fadeIn .80s .78s; }
+
+  @keyframes slideL{ from{ opacity:0; transform:translateX(38px); } to{ opacity:1; transform:none; } }
+  @keyframes popIn { from{ opacity:0; transform:scale(.86);      } to{ opacity:1; transform:scale(1); } }
+  @keyframes riseIn{ from{ opacity:0; transform:translateY(11px); } to{ opacity:1; transform:none; } }
+  @keyframes fadeIn{ from{ opacity:0; transform:translateY(6px);  } to{ opacity:1; transform:none; } }
+
+  /* ——— живой покой ——— */
+  .horse  img{ animation:floatY 5.5s 1.4s ease-in-out infinite alternate; }
+  .disc   img{ animation:breathe 6.5s 1.4s ease-in-out infinite alternate;
+               transform-origin:91.5px 56.5px; }
+  .couple img{ animation:sway 7.5s 1.6s ease-in-out infinite alternate;
+               transform-origin:50% 100%; }
+
+  @keyframes floatY { from{ transform:translateY(0); }        to{ transform:translateY(-2.5px); } }
+  @keyframes breathe{ from{ transform:scale(1); }             to{ transform:scale(1.035); } }
+  @keyframes sway   { from{ transform:rotate(-.55deg); }       to{ transform:rotate(.55deg); } }
+
+  /* ——— блик ——— */
+  .sheen{
+    position:absolute; inset:-25% -40%; pointer-events:none;
+    background:linear-gradient(102deg,
+      rgba(255,255,255,0) 42%, rgba(255,255,255,.055) 50%, rgba(255,255,255,0) 58%);
+    transform:translateX(-60%);
+  }
+  .play .sheen{ animation:sweep 9s 2.2s ease-in-out infinite; }
+  @keyframes sweep{ 0%{ transform:translateX(-60%); } 45%,100%{ transform:translateX(60%); } }
+
+  @media (prefers-reduced-motion:reduce){
+    .play .lay, .lay img, .play .sheen{ animation:none !important; }
+    .lay{ opacity:1 !important; transform:none !important; }
+    .sheen{ display:none; }
+  }
+</style>
+</head>
+<body>
+<div class="banner play" id="banner" role="img"
+     aria-label="Азбука вкуса. В компании художников: соберите коллекцию шедевров">
+  <div class="lay horse"><img src="assets/horse.png" alt=""></div>
+  <div class="lay disc"><img src="assets/disc.png" alt=""></div>
+  <div class="lay couple"><img src="assets/couple.png" alt=""></div>
+  <div class="lay badge"><img src="assets/badge.png" alt=""></div>
+  <div class="lay h1"><img src="assets/h1.png" alt=""></div>
+  <div class="lay h2"><img src="assets/h2.png" alt=""></div>
+  <div class="lay logo"><img src="assets/logo.png" alt=""></div>
+  <div class="sheen"></div>
+</div>
+<script>
+  // клик по баннеру — проиграть анимацию заново
+  var b = document.getElementById('banner');
+  b.addEventListener('click', function(){
+    b.classList.remove('play');
+    void b.offsetWidth;
+    b.classList.add('play');
+  });
+</script>
+</body>
+</html>

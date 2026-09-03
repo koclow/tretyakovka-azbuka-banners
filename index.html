@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Третьяковка × Азбука вкуса — баннеры</title>
+<style>
+  :root{
+    --bg:#0c0e0d;
+    --ink:#f2f4f2;
+    --muted:#8b938d;
+    --line:rgba(255,255,255,.09);
+    --accent:#c7a15e;
+  }
+  *{ box-sizing:border-box; }
+  html,body{ margin:0; padding:0; }
+  body{
+    min-height:100vh;
+    background:
+      radial-gradient(1100px 620px at 18% -10%, rgba(24,73,54,.55), transparent 70%),
+      radial-gradient(900px 500px at 92% 108%, rgba(199,161,94,.10), transparent 70%),
+      var(--bg);
+    color:var(--ink);
+    font:400 15px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
+    -webkit-font-smoothing:antialiased;
+    padding:64px 40px 96px;
+  }
+  .wrap{ max-width:1100px; margin:0 auto; }
+
+  header{ margin-bottom:52px; }
+  .eyebrow{
+    display:inline-block; font-size:11px; letter-spacing:.14em; text-transform:uppercase;
+    color:var(--accent); border:1px solid rgba(199,161,94,.35);
+    border-radius:999px; padding:5px 12px; margin-bottom:20px;
+  }
+  h1{ margin:0 0 10px; font-size:30px; line-height:1.15; font-weight:600; letter-spacing:-.01em; }
+  .sub{ margin:0; color:var(--muted); max-width:62ch; }
+
+  .grid{ display:flex; flex-wrap:wrap; gap:48px 44px; align-items:flex-start; }
+
+  .slot{ }
+  .slot h2{
+    margin:0 0 12px; font-size:12px; font-weight:600;
+    letter-spacing:.1em; text-transform:uppercase; color:var(--muted);
+    display:flex; align-items:center; gap:10px;
+  }
+  .slot h2 b{
+    font-weight:600; color:var(--ink);
+    background:rgba(255,255,255,.06); border:1px solid var(--line);
+    border-radius:6px; padding:3px 8px; letter-spacing:.04em;
+  }
+  .frame{
+    position:relative; display:block; padding:0; border:0;
+    box-shadow:0 0 0 1px var(--line), 0 30px 70px -30px rgba(0,0,0,.9);
+    background:#184936;
+  }
+  iframe{ display:block; border:0; }
+
+  .actions{ margin-top:44px; display:flex; align-items:center; gap:16px; flex-wrap:wrap; }
+  button{
+    font:inherit; color:var(--ink); cursor:pointer;
+    background:rgba(255,255,255,.06); border:1px solid var(--line);
+    border-radius:10px; padding:10px 16px;
+    transition:background .18s ease, border-color .18s ease, transform .18s ease;
+  }
+  button:hover{ background:rgba(255,255,255,.11); border-color:rgba(255,255,255,.2); }
+  button:active{ transform:translateY(1px); }
+  .hint{ color:var(--muted); font-size:13px; }
+  .hint a{ color:var(--ink); text-decoration:none; border-bottom:1px solid var(--line); }
+  .hint a:hover{ border-color:var(--accent); }
+
+  @media (max-width:760px){
+    body{ padding:40px 20px 72px; }
+    h1{ font-size:24px; }
+    .grid{ gap:40px 24px; }
+    .slot{ max-width:100%; overflow-x:auto; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <span class="eyebrow">в компании художников</span>
+    <h1>Третьяковка × Азбука вкуса — HTML-баннеры</h1>
+    <p class="sub">Два фиксированных баннера из макета, собранные в HTML с лёгкой анимацией:
+      появление слоёв, спокойное «дыхание» иллюстрации и мягкий блик. Без ресайза — размеры 1:1 с макетом.
+      Клик по баннеру проигрывает анимацию заново.</p>
+  </header>
+
+  <div class="grid">
+    <section class="slot">
+      <h2>Горизонтальный <b>680 × 250</b></h2>
+      <div class="frame" style="width:680px;height:250px">
+        <iframe id="f680" src="banners/680x250/index.html" width="680" height="250"
+                scrolling="no" title="Баннер 680×250"></iframe>
+      </div>
+    </section>
+
+    <section class="slot">
+      <h2>Квадратный <b>300 × 250</b></h2>
+      <div class="frame" style="width:300px;height:250px">
+        <iframe id="f300" src="banners/300x250/index.html" width="300" height="250"
+                scrolling="no" title="Баннер 300×250"></iframe>
+      </div>
+    </section>
+  </div>
+
+  <div class="actions">
+    <button id="replay">Проиграть заново</button>
+    <span class="hint">Отдельно:
+      <a href="banners/680x250/index.html">680×250</a> ·
+      <a href="banners/300x250/index.html">300×250</a>
+    </span>
+  </div>
+</div>
+
+<script>
+  document.getElementById('replay').addEventListener('click', function(){
+    ['f680','f300'].forEach(function(id){
+      var f = document.getElementById(id);
+      f.contentWindow.location.reload();
+    });
+  });
+</script>
+</body>
+</html>

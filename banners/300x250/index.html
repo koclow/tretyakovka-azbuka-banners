@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=300">
+<title>Соберите коллекцию шедевров — 300×250</title>
+<style>
+  :root{ --green:#184936; }
+  *{ margin:0; padding:0; box-sizing:border-box; }
+  html,body{ width:300px; height:250px; background:var(--green); overflow:hidden; }
+
+  .banner{
+    position:relative; width:300px; height:250px;
+    background:var(--green); overflow:hidden;
+    cursor:pointer; user-select:none; -webkit-tap-highlight-color:transparent;
+  }
+  .lay{ position:absolute; will-change:transform,opacity; }
+  .lay > img{ display:block; width:100%; height:100%; }
+
+  /* ——— геометрия слоёв: 1:1 с макетом ——— */
+  .l1   { left:28.333px; top:31.667px; width:213px;     height:43.333px; }
+  .l2   { left:29.667px; top:79px;     width:232.667px; height:30px; }
+  .l3   { left:29.667px; top:117px;    width:213.333px; height:34px; }
+  .logo { left:27px;     top:184px;    width:220.667px; height:34px; }
+
+  /* ——— появление ——— */
+  .play .lay{ animation-fill-mode:both; animation-timing-function:cubic-bezier(.22,.7,.25,1); }
+  .play .l1  { animation:riseIn .75s .14s; }
+  .play .l2  { animation:riseIn .75s .27s; }
+  .play .l3  { animation:riseIn .75s .40s; }
+  .play .logo{ animation:fadeIn .85s .70s; }
+
+  @keyframes riseIn{ from{ opacity:0; transform:translateY(16px); } to{ opacity:1; transform:none; } }
+  @keyframes fadeIn{ from{ opacity:0; transform:translateY(7px);  } to{ opacity:1; transform:none; } }
+
+  /* ——— живой покой: мягкая волна по строкам ——— */
+  .l1 img  { animation:floatY 5.4s 1.3s ease-in-out infinite alternate; }
+  .l2 img  { animation:floatY 5.4s 1.5s ease-in-out infinite alternate; }
+  .l3 img  { animation:floatY 5.4s 1.7s ease-in-out infinite alternate; }
+  .logo img{ animation:floatY 6.6s 1.9s ease-in-out infinite alternate; }
+  @keyframes floatY{ from{ transform:translateY(0); } to{ transform:translateY(-1.6px); } }
+
+  /* ——— блик ——— */
+  .sheen{
+    position:absolute; inset:-25% -60%; pointer-events:none;
+    background:linear-gradient(102deg,
+      rgba(255,255,255,0) 42%, rgba(255,255,255,.06) 50%, rgba(255,255,255,0) 58%);
+    transform:translateX(-55%);
+  }
+  .play .sheen{ animation:sweep 9s 2s ease-in-out infinite; }
+  @keyframes sweep{ 0%{ transform:translateX(-55%); } 45%,100%{ transform:translateX(55%); } }
+
+  @media (prefers-reduced-motion:reduce){
+    .play .lay, .lay img, .play .sheen{ animation:none !important; }
+    .lay{ opacity:1 !important; transform:none !important; }
+    .sheen{ display:none; }
+  }
+</style>
+</head>
+<body>
+<div class="banner play" id="banner" role="img"
+     aria-label="Азбука вкуса. Соберите коллекцию шедевров">
+  <div class="lay l1"><img src="assets/l1.png" alt=""></div>
+  <div class="lay l2"><img src="assets/l2.png" alt=""></div>
+  <div class="lay l3"><img src="assets/l3.png" alt=""></div>
+  <div class="lay logo"><img src="assets/logo.png" alt=""></div>
+  <div class="sheen"></div>
+</div>
+<script>
+  var b = document.getElementById('banner');
+  b.addEventListener('click', function(){
+    b.classList.remove('play');
+    void b.offsetWidth;
+    b.classList.add('play');
+  });
+</script>
+</body>
+</html>
