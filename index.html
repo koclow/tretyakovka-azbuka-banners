@@ -143,7 +143,7 @@
     <h1>Третьяковка × Азбука вкуса — HTML-баннеры для РБК</h1>
     <p class="sub">Что просит ТТ РБК: билборд 100%×250 на десктоп — первый экран и второй по доскролу,
       и мобильный 300×250 в слот 100%×250. Появление в языке фирменного ролика: иллюстрация поднимается,
-      слова и логотип въезжают со «смазом», слово за словом; дальше картинка едва дышит.
+      слова и логотип мягко въезжают слева, слово за словом; дальше картинка едва дышит.
       Клик по баннеру проигрывает появление заново.</p>
   </header>
 
@@ -155,50 +155,56 @@
     <div class="slot" style="margin-bottom:28px">
       <h3>А — иллюстрация <span class="chip">100% × 250</span></h3>
       <div class="frame" style="height:250px">
-        <iframe id="fbb" src="banners/billboard-100x250/index.html" scrolling="no" title="Билборд, иллюстрация"></iframe>
+        <iframe id="fbb" src="creatives/desktop-illustration/index.html" scrolling="no" title="Билборд, иллюстрация"></iframe>
       </div>
     </div>
     <div class="slot">
       <h3>Б — фото <span class="chip">100% × 250</span></h3>
       <div class="frame" style="height:250px">
-        <iframe id="fbp" src="banners/billboard-photo-100x250/index.html" scrolling="no" title="Билборд, фото"></iframe>
+        <iframe id="fbp" src="creatives/desktop-photo/index.html" scrolling="no" title="Билборд, фото"></iframe>
       </div>
     </div>
   </section>
 
   <section>
     <h2 class="section">Мобильный 300×250 — два героя</h2>
-    <p class="section-note">По ТТ мобильный баннер — файл 300×250; на телефоне он встаёт в слот 100%×250
-      по центру, а поля РБК заливает фоновым цветом баннера. Ровно так показано здесь: рамка 375 px,
-      креатив по центру. По умолчанию сверху женщина, по доскролу мужчина.</p>
+    <p class="section-note">По ТТ мобильный баннер — файл 300×250 в слот 100%×250. Собран по макету «iPhone 16»:
+      фото слева во всю высоту, набор справа. На 300 px это ровно файл из ТТ, шире — тянется по слоту,
+      фото и набор подрастают. По умолчанию сверху женщина, по доскролу мужчина.</p>
     <div class="grid">
       <div class="slot">
-        <h3>Женщина <span class="chip">300 × 250</span> <span class="chip">в слоте 375</span></h3>
-        <div class="frame" style="width:375px;height:250px">
-          <iframe id="fmw" src="banners/mobile-300x250-woman/index.html" scrolling="no" title="Мобильный, женщина"></iframe>
+        <h3>Женщина <span class="chip">300 × 250</span></h3>
+        <div class="frame" style="width:300px;height:250px">
+          <iframe id="fmw" src="creatives/mobile-woman/index.html" scrolling="no" title="Мобильный, женщина, 300"></iframe>
         </div>
       </div>
       <div class="slot">
-        <h3>Мужчина <span class="chip">300 × 250</span> <span class="chip">в слоте 375</span></h3>
+        <h3>Женщина <span class="chip">в слоте 375</span></h3>
         <div class="frame" style="width:375px;height:250px">
-          <iframe id="fmm" src="banners/mobile-300x250-man/index.html" scrolling="no" title="Мобильный, мужчина"></iframe>
+          <iframe id="fmw2" src="creatives/mobile-woman/index.html" scrolling="no" title="Мобильный, женщина, 375"></iframe>
+        </div>
+      </div>
+      <div class="slot">
+        <h3>Мужчина <span class="chip">в слоте 375</span></h3>
+        <div class="frame" style="width:375px;height:250px">
+          <iframe id="fmm" src="creatives/mobile-man/index.html" scrolling="no" title="Мобильный, мужчина, 375"></iframe>
         </div>
       </div>
       <div class="slot">
         <h3>Запасной — сплошной набор <span class="chip">300 × 250</span></h3>
         <div class="frame" style="width:300px;height:250px">
-          <iframe id="f300" src="banners/300x250/index.html" scrolling="no" title="Баннер 300×250, сплошной набор"></iframe>
+          <iframe id="f300" src="creatives/square-plain/index.html" scrolling="no" title="Баннер 300×250, сплошной набор"></iframe>
         </div>
       </div>
     </div>
     <div class="actions">
       <button class="plain" id="replay">Проиграть заново</button>
       <span class="hint">Отдельно:
-        <a href="banners/billboard-100x250/index.html">билборд А</a> ·
-        <a href="banners/billboard-photo-100x250/index.html">билборд Б</a> ·
-        <a href="banners/mobile-300x250-woman/index.html">мобильный, женщина</a> ·
-        <a href="banners/mobile-300x250-man/index.html">мобильный, мужчина</a> ·
-        <a href="banners/300x250/index.html">300×250, сплошной</a>
+        <a href="creatives/desktop-illustration/index.html">билборд А</a> ·
+        <a href="creatives/desktop-photo/index.html">билборд Б</a> ·
+        <a href="creatives/mobile-woman/index.html">мобильный, женщина</a> ·
+        <a href="creatives/mobile-man/index.html">мобильный, мужчина</a> ·
+        <a href="creatives/square-plain/index.html">300×250, сплошной</a>
         &nbsp;·&nbsp; к адресу баннера можно дописать <code style="color:var(--accent)">?at=900</code> — стоп-кадр на 900-й миллисекунде
       </span>
     </div>
@@ -209,7 +215,7 @@
     <p class="section-note">Потяните ползунок или правый край стенда. От 680 до 1440 px билборд тянется
       между двумя макетами: растут иллюстрация и заголовок, разъезжается композиция. Дальше 1440 px
       контент центрируется, поля добираются фоновым цветом — как и написано в ТТ. Ниже 680 px билборд
-      в слот не попадает, там мобильный 300×250 — и тоже по центру, с полями цветом фона.</p>
+      в слот не попадает, там мобильный 300×250, который тянется по ширине слота.</p>
     <div class="panel">
       <div class="controls">
         <div class="group">
@@ -228,7 +234,7 @@
       </div>
 
       <div class="stage" id="stage">
-        <iframe id="demo" src="banners/billboard-100x250/index.html" scrolling="no" title="Демонстрация ресайза"></iframe>
+        <iframe id="demo" src="creatives/desktop-illustration/index.html" scrolling="no" title="Демонстрация ресайза"></iframe>
       </div>
 
       <div class="rail" id="presets"></div>
@@ -270,10 +276,10 @@
       <tr><td>Billboard 100%×250 Desktop — первый экран и второй по доскролу</td><td>два креатива: А иллюстрация (первый экран), Б фото (по доскролу)</td><td class="ok">✓</td></tr>
       <tr><td>HTML5 корректен при 680–1440 px и шире (десктоп и планшет)</td><td>680 px — ровно макет, до 1440 композиция разъезжается, дальше центр и поля фоном</td><td class="ok">✓</td></tr>
       <tr><td>Архив билборда ≤ 150 КБ</td><td>А — 75 КБ, Б — 111 КБ</td><td class="ok">✓</td></tr>
-      <tr><td>Заглушка билборда 680×250 gif/jpg ≤ 85 КБ</td><td><a href="fallback/billboard-a-680x250.jpg" style="color:inherit">А</a> и <a href="fallback/billboard-b-680x250.jpg" style="color:inherit">Б</a> — см. размеры в README</td><td class="ok">✓</td></tr>
-      <tr><td>Mobile 100%×250 / 300×250 — файл html5 300×250</td><td>два креатива 300×250 по макету «4» (женщина, мужчина); в слоте 100%×250 стоят по центру</td><td class="ok">✓</td></tr>
-      <tr><td>Архив мобильного ≤ 150 КБ</td><td>женщина — 51 КБ, мужчина — 65 КБ, сплошной 300×250 — 19 КБ</td><td class="ok">✓</td></tr>
-      <tr><td>Заглушка мобильного 300×250 gif/jpg/png ≤ 65 КБ</td><td><a href="fallback/mobile-woman-300x250.jpg" style="color:inherit">женщина</a>, <a href="fallback/mobile-man-300x250.jpg" style="color:inherit">мужчина</a>, <a href="fallback/banner-300x250.jpg" style="color:inherit">сплошной</a></td><td class="ok">✓</td></tr>
+      <tr><td>Заглушка билборда 680×250 gif/jpg ≤ 85 КБ</td><td><a href="fallback/desktop-illustration.jpg" style="color:inherit">иллюстрация</a> и <a href="fallback/desktop-photo.jpg" style="color:inherit">фото</a></td><td class="ok">✓</td></tr>
+      <tr><td>Mobile 100%×250 / 300×250 — файл html5 300×250</td><td>два креатива по макету «iPhone 16» (женщина, мужчина): на 300 px — файл 300×250, в слоте 100%×250 тянутся по ширине</td><td class="ok">✓</td></tr>
+      <tr><td>Архив мобильного ≤ 150 КБ</td><td>женщина — 44 КБ, мужчина — 51 КБ, сплошной 300×250 — 19 КБ</td><td class="ok">✓</td></tr>
+      <tr><td>Заглушка мобильного 300×250 gif/jpg/png ≤ 65 КБ</td><td><a href="fallback/mobile-woman.jpg" style="color:inherit">женщина</a>, <a href="fallback/mobile-man.jpg" style="color:inherit">мужчина</a>, <a href="fallback/square-plain.jpg" style="color:inherit">сплошной</a></td><td class="ok">✓</td></tr>
       <tr><td>Пустые поля — основным (фоновым) цветом баннера</td><td>фон <code>#184936</code> залит на всю ширину слота у всех креативов</td><td class="ok">✓</td></tr>
       <tr><td>Без «ядовитых» цветов в фоне</td><td>тёмно-зелёный фирменный</td><td class="ok">✓</td></tr>
       <tr><td>L-board (видео MOV ProRes 4444, 1920×1080, 10/15/20 с)</td><td>отдельный формат для эфира телеканала, не HTML — в этой работе не делали</td><td style="color:#c7a15e">—</td></tr>
@@ -295,26 +301,26 @@
 
   var CONF = {
     'bb': {
-      src:'banners/billboard-100x250/index.html', w:1000, h:250, fixedHeight:true,
+      src:'creatives/desktop-illustration/index.html', w:1000, h:250, fixedHeight:true,
       min:680, max:1920, presets:[680, 1024, 1424, 1920],
       note:'<b>Билборд А, иллюстрация.</b> На 680 px — ровно макет-заглушка, на 1440 — макет «вар 2». ' +
            'Между ними всё линейно: конь, круг и пара растут и расходятся, заголовок с 960 px тоже растёт, ' +
            'логотип с 900 px встаёт в строку. Заголовок и логотип — вектор, картинка резкая на любой ширине.'
     },
     'bp': {
-      src:'banners/billboard-photo-100x250/index.html', w:1000, h:250, fixedHeight:true,
+      src:'creatives/desktop-photo/index.html', w:1000, h:250, fixedHeight:true,
       min:680, max:1920, presets:[680, 1024, 1424, 1920],
       note:'<b>Билборд Б, фото.</b> Макет «вар 1»: зелёная панель 58 % ширины, фото коробки со значками — ' +
            'остальное, кадрируется под слот. Набор растёт от 680 к 1440 линейно.'
     },
     'mw': {
-      src:'banners/mobile-300x250-woman/index.html', w:375, h:250, fixedHeight:true,
+      src:'creatives/mobile-woman/index.html', w:375, h:250, fixedHeight:true,
       min:300, max:679, presets:[320, 375, 430, 600],
-      note:'<b>Мобильный 300×250 в слоте 100%×250.</b> Макет «4»: фото сверху, набор снизу. Сам креатив не тянется — ' +
-           'он стоит по центру слота, а поля заливаются фоновым цветом, как и обещает ТТ. От 680 px начинается билборд.'
+      note:'<b>Мобильный 300×250 в слоте 100%×250.</b> Макет «iPhone 16»: фото слева, набор справа. На 300 px — ' +
+           'ровно файл из ТТ; до 375 набор подрастает, дальше фото доходит до 170 px, а справа остаётся воздух. От 680 px начинается перетяжка.'
     },
     '300': {
-      src:'banners/300x250/index.html', w:300, h:250, fixedHeight:false,
+      src:'creatives/square-plain/index.html', w:300, h:250, fixedHeight:false,
       min:240, max:900, presets:[240, 300, 420, 600],
       note:'<b>Запасной 300×250, сплошной набор.</b> Из первого макета; растягивать нечем — масштабируется целиком, ' +
            'пропорция 300 : 250 держится сама.'
@@ -371,7 +377,7 @@
   if (window.ResizeObserver) new ResizeObserver(sync).observe(stage);
 
   document.getElementById('replay').addEventListener('click', function(){
-    ['fbb','fbp','fmw','fmm','f300','demo'].forEach(function(id){
+    ['fbb','fbp','fmw','fmw2','fmm','f300','demo'].forEach(function(id){
       var f = document.getElementById(id);
       if (f) f.contentWindow.location.reload();
     });

@@ -14,16 +14,16 @@ DIST = ROOT / "dist"
 DIST.mkdir(exist_ok=True)
 
 BANNERS = {
-    "billboard-100x250": "billboard-100x250",
-    "billboard-photo-100x250": "billboard-photo-100x250",
-    "mobile-300x250-woman": "mobile-300x250-woman",
-    "mobile-300x250-man": "mobile-300x250-man",
-    "300x250": "banner-300x250",
+    "desktop-illustration": "desktop-illustration",
+    "desktop-photo": "desktop-photo",
+    "mobile-woman": "mobile-woman",
+    "mobile-man": "mobile-man",
+    "square-plain": "square-plain",
 }
 LIMIT_KB = 150
 
 for folder, name in BANNERS.items():
-    src = ROOT / "banners" / folder / "index.html"
+    src = ROOT / "creatives" / folder / "index.html"
     html = src.read_text(encoding="utf-8")
 
     def inline(m):
