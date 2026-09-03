@@ -162,11 +162,20 @@
 (function(){
   var SRC = {
     illo:  '../banners/billboard-100x250/index.html',
-    photo: '../banners/billboard-photo-100x250/index.html'
+    photo: '../banners/billboard-photo-100x250/index.html',
+    woman: '../banners/mobile-100x250-woman/index.html',
+    man:   '../banners/mobile-100x250-man/index.html'
   };
   var q = new URLSearchParams(location.search);
-  var top  = SRC[q.get('top')]  || SRC.illo;
-  var more = SRC[q.get('more')] || SRC.photo;
+  var mobile = innerWidth < 680;   // билборд по ТТ — от 680 px; уже — мобильный креатив
+  var top  = mobile ? (SRC[q.get('mtop')]  || SRC.woman) : (SRC[q.get('top')]  || SRC.illo);
+  var more = mobile ? (SRC[q.get('mmore')] || SRC.man)   : (SRC[q.get('more')] || SRC.photo);
+  if (mobile){
+    document.querySelectorAll('.slot-head .name').forEach(function(n){
+      if (n.textContent === 'after_topline_inner') n.nextElementSibling.textContent = 'мобильный 100%×250, первый экран';
+      if (n.textContent === 'after_topline_more_inner'){ n.textContent = 'after_topline_inner_mobile_more'; n.nextElementSibling.textContent = 'мобильный 100%×250 в догруженном материале'; }
+    });
+  }
 
   // первый экран — сразу
   document.getElementById('slot-top').src = top;

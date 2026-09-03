@@ -3,149 +3,105 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Соберите коллекцию шедевров — билборд 100%×250</title>
+<title>Соберите коллекцию шедевров — билборд 100%×250, иллюстрация</title>
 <style>
   :root{
     --green:#184936;
-    --ease-out:cubic-bezier(.23,1,.32,1);
+    --ease-out:cubic-bezier(.16,1,.3,1);      /* мягкий длинный выход — премиальный темп */
     --ease-calm:cubic-bezier(.37,0,.63,1);
   }
   *{ margin:0; padding:0; box-sizing:border-box; }
   html,body{ width:100%; height:100%; background:var(--green); overflow:hidden; }
-
-  /* Слот РБК after_topline_inner: ширина 100%, высота ровно 250.
-     Пустые поля по краям заливаются фоновым цветом баннера — как требует ТТ. */
-  .banner{
-    position:relative; width:100%; height:250px;
-    background:var(--green); overflow:hidden;
-    cursor:pointer; user-select:none; -webkit-tap-highlight-color:transparent;
-  }
-  /* Контентная коробка: тянется до 1600 px, дальше центрируется,
-     а поля по краям добираются фоновым цветом — как требует ТТ. */
-  .box{
-    position:absolute; left:0; right:0; top:0; height:100%;
-    margin:0 auto; max-width:1600px;
-  }
+  .banner{ position:relative; width:100%; height:250px; background:var(--green); overflow:hidden;
+           cursor:pointer; user-select:none; -webkit-tap-highlight-color:transparent; }
+  .box{ position:absolute; left:0; right:0; top:0; height:100%; margin:0 auto; max-width:1440px;
+        container-type:inline-size;
+        --d:calc(100cqw - 680px); }   /* «сколько мы шире минимума» — ширина коробки, не высота */
   .lay{ position:absolute; }
-  .lay > img{ display:block; width:100%; height:100%; }
+  .lay > img{ display:block; width:100%; height:auto; }
 
-  /* ——— узкий слот (мобильный 100%×250): квадратная раскладка ———
-     Уменьшать настольную композицию до 138 px по высоте нельзя — кегль
-     становится нечитаемым. Вместо этого показываем набор из макета 300×250
-     в натуральную величину по центру, поля добираются фоном. */
-  .wide{ display:none; }
-  .box{ left:50%; right:auto; transform:translateX(-50%); width:300px; max-width:100%; }
-  .l1     { left:28.333px; top:31.667px; width:213px;     height:43.333px; }
-  .l2     { left:29.667px; top:79px;     width:232.667px; height:30px; }
-  .l3     { left:29.667px; top:117px;    width:213.333px; height:34px; }
-  .logo-m { left:27px;     top:184px;    width:220.667px; height:34px; }
+  /* Два опорных макета: 680×250 (минимум и заглушка) и 1440×250 («вар 2»).
+     Между ними всё линейно: left = L680 + (ширина − 680) · k. */
+  .badge   { left:calc(23px + var(--d) * .02237); top:calc(30px - var(--d) * .00526); width:216px; }
+  .headline{ left:calc(24px + var(--d) * .02329); top:calc(60px + var(--d) * .01066); width:272px; }
+  .logo-st { left:calc(23px + var(--d) * .02237); top:calc(180px + var(--d) * .01316); width:123px; }
+  .logo-ln { left:calc(23px + var(--d) * .02237); top:calc(180px + var(--d) * .01316); width:267px; height:40px; display:none; }
+  .logo-ln .mark{ position:absolute; left:0; top:0; width:48.4px; }
+  .logo-ln .word{ position:absolute; left:62.1px; top:4px; width:204.9px; }
 
-  /* ——— от 680 и шире: настольная раскладка ———
-     На 680 px это ровно макет. Дальше кегль замирает: текст держится левого
-     края, пара уходит к правому, круг с горами встаёт между ними — поле
-     разъезжается равномерно, а не одной дырой посередине. */
-  @media (min-width:680px){
-    .narrow{ display:none; }
-    .wide{ display:block; }
-    .box{ left:0; right:0; transform:none; width:auto; max-width:1600px; }
+  .horse { left:calc(247px + var(--d) * .51447);     top:calc(100.667px - var(--d) * .10351); width:calc(203.333px + var(--d) * .17561); }
+  .disc  { left:calc(400px + var(--d) * .75658);     top:calc(0px - var(--d) * .01197);       width:calc(183px + var(--d) * .10961);
+           transform-origin:50% 38.2%; }
+  .couple{ left:calc(576.333px + var(--d) * .9114);  top:calc(64px - var(--d) * .06316);      width:calc(96px + var(--d) * .06); }
 
-    /* Иллюстрация растёт вместе со слотом: на 680 — размер макета,
-       к 1424 — в 1,3 раза крупнее, дальше не растёт. Конь и пара стоят
-       на нижней кромке, круг по-прежнему срезан верхней. */
-    .horse  { left:calc(247px + (100% - 680px) * .05); bottom:0; top:auto;
-              width:clamp(203.333px, calc(203.333px + (100% - 680px) * .082), 264px);
-              height:auto; aspect-ratio:203.333 / 149.333; }
-    .disc   { left:calc(50% + 60px); top:0;
-              width:clamp(183px, calc(183px + (100% - 680px) * .074), 238px);
-              height:auto; aspect-ratio:183 / 148; }
-    .couple { left:auto; right:calc(7.667px + (100% - 680px) * .02); bottom:0; top:auto;
-              width:clamp(96px, calc(96px + (100% - 680px) * .039), 125px);
-              height:auto; aspect-ratio:96 / 186; }
+  /* заголовок растёт только после 960 px — иначе к 800 px упирается в голову коня */
+  @media (min-width:960px){ .headline{ width:calc(272px + (100cqw - 960px) * .46771); } }
+  /* логотип: до 900 px — макетный, в две строки; дальше — в строку, как в макете 1440 */
+  @media (min-width:900px){ .logo-st{ display:none; } .logo-ln{ display:block; } }
 
-    .badge  { left:23px;     top:30px;     width:216px;     height:25px; }
-    .h1     { left:23.667px; top:60px;     width:271.333px; height:26.333px; }
-    .h2     { left:24.333px; top:91.333px; width:127.333px; height:21px; }
-    .logo   { left:23px;     top:180px;    width:123px;     height:40px; }
+  /* ——— узкий слот (< 680): только набор, по центру ——— */
+  .m{ display:none; }
+  @media (max-width:679.98px){
+    .wide{ display:none; }
+    .m{ display:block; }
+    .box{ left:50%; right:auto; transform:translateX(-50%); width:300px; }
+    .m.headline{ left:24px; top:74px; width:252px; }
+    .m.logo-st { left:24px; top:174px; width:123px; }
   }
 
-  /* ——— появление ——— */
-  .play .horse { animation:slideIn .72s var(--ease-out) .10s both; }
-  .play .disc  { animation:popIn   .66s var(--ease-out) .20s both; }
-  .play .couple{ animation:slideIn .66s var(--ease-out) .30s both; }
-  .play .badge { animation:riseIn  .50s var(--ease-out) .14s both; }
-  .play .h1    { animation:riseIn  .56s var(--ease-out) .24s both; }
-  .play .h2    { animation:riseIn  .56s var(--ease-out) .31s both; }
-  .play .logo  { animation:riseIn  .60s var(--ease-out) .50s both; }
-  .play .l1    { animation:riseIn  .58s var(--ease-out) .12s both; }
-  .play .l2    { animation:riseIn  .58s var(--ease-out) .19s both; }
-  .play .l3    { animation:riseIn  .58s var(--ease-out) .26s both; }
-  .play .logo-m{ animation:riseIn  .60s var(--ease-out) .42s both; }
+  /* ——— появление: неспешно, слоями, всё на месте к ~2,3 с ——— */
+  .play .horse   { animation:driftIn 1.4s var(--ease-out) .10s both; }
+  .play .disc    { animation:discIn  1.5s var(--ease-out) .40s both; }
+  .play .couple  { animation:driftIn 1.3s var(--ease-out) .65s both; }
+  .play .badge   { animation:riseIn  1.0s var(--ease-out) .25s both; }
+  .play .headline{ animation:wipeIn  1.5s var(--ease-out) .50s both; }
+  .play .logo-st, .play .logo-ln{ animation:riseIn 1.1s var(--ease-out) 1.25s both; }
 
-  @keyframes slideIn{ from{ opacity:0; transform:translateX(22%); } to{ opacity:1; transform:none; } }
-  @keyframes popIn  { from{ opacity:0; transform:scale(.94);      } to{ opacity:1; transform:scale(1); } }
-  @keyframes riseIn { from{ opacity:0; transform:translateY(40%); } to{ opacity:1; transform:none; } }
+  @keyframes driftIn{ from{ opacity:0; transform:translateX(9%); } to{ opacity:1; transform:none; } }
+  @keyframes discIn { from{ opacity:0; transform:scale(.92) rotate(-4deg); } to{ opacity:1; transform:none; } }
+  @keyframes riseIn { from{ opacity:0; transform:translateY(10px); } to{ opacity:1; transform:none; } }
+  @keyframes wipeIn { from{ opacity:0; clip-path:inset(0 100% 0 0); transform:translateY(8px); }
+                      to  { opacity:1; clip-path:inset(0 0 0 0);    transform:none; } }
 
-  /* ——— покой ——— */
-  .horse  img{ animation:floatY  5.5s var(--ease-calm) 1.6s infinite alternate; }
-  .disc   img{ animation:breathe 6.5s var(--ease-calm) 1.6s infinite alternate;
-               transform-origin:50% 38.1757%; }
-  .couple img{ animation:sway    7.5s var(--ease-calm) 1.8s infinite alternate;
-               transform-origin:50% 100%; }
-
-  @keyframes floatY { from{ transform:translateY(0); }   to{ transform:translateY(-1.674%); } }
-  @keyframes breathe{ from{ transform:scale(1); }        to{ transform:scale(1.035); } }
-  @keyframes sway   { from{ transform:rotate(-.55deg); } to{ transform:rotate(.55deg); } }
+  /* ——— покой: едва заметно и очень медленно ——— */
+  .horse  img{ animation:floatY  9s  var(--ease-calm) 2.6s infinite alternate; }
+  .disc   img{ animation:breathe 11s var(--ease-calm) 2.6s infinite alternate; transform-origin:50% 38.2%; }
+  .couple img{ animation:sway    12s var(--ease-calm) 2.9s infinite alternate; transform-origin:50% 100%; }
+  @keyframes floatY { from{ transform:translateY(0); }   to{ transform:translateY(-1.4%); } }
+  @keyframes breathe{ from{ transform:scale(1); }        to{ transform:scale(1.03); } }
+  @keyframes sway   { from{ transform:rotate(-.4deg); }  to{ transform:rotate(.4deg); } }
 
   @media (prefers-reduced-motion:reduce){
-    .play .lay, .lay img{ animation:none !important; transform:none !important; opacity:1 !important; }
-    .play{ animation:softIn .3s ease both; }
+    .play .lay, .lay img{ animation:none !important; transform:none !important; opacity:1 !important; clip-path:none !important; }
+    .play{ animation:softIn .4s ease both; }
     @keyframes softIn{ from{ opacity:0; } to{ opacity:1; } }
   }
 </style>
 </head>
 <body>
-<div class="banner" id="banner" role="img"
-     aria-label="Азбука вкуса. В компании художников: соберите коллекцию шедевров">
+<div class="banner" id="banner" role="img" aria-label="Азбука вкуса. В компании художников: соберите коллекцию шедевров">
   <div class="box">
-    <!-- настольная раскладка, от 680 px -->
     <div class="lay wide horse"><img src="assets/horse.png" alt=""></div>
     <div class="lay wide disc"><img src="assets/disc.png" alt=""></div>
     <div class="lay wide couple"><img src="assets/couple.png" alt=""></div>
     <div class="lay wide badge"><img src="assets/badge.png" alt=""></div>
-    <div class="lay wide h1"><img src="assets/h1.png" alt=""></div>
-    <div class="lay wide h2"><img src="assets/h2.png" alt=""></div>
-    <div class="lay wide logo"><img src="assets/logo.png" alt=""></div>
-    <!-- узкая раскладка, до 680 px -->
-    <div class="lay narrow l1"><img src="assets/l1.png" alt="" loading="lazy"></div>
-    <div class="lay narrow l2"><img src="assets/l2.png" alt="" loading="lazy"></div>
-    <div class="lay narrow l3"><img src="assets/l3.png" alt="" loading="lazy"></div>
-    <div class="lay narrow logo-m"><img src="assets/logo-m.png" alt="" loading="lazy"></div>
+    <div class="lay wide headline"><img src="assets/headline.svg" alt=""></div>
+    <div class="lay wide logo-st"><img src="assets/logo.png" alt=""></div>
+    <div class="lay wide logo-ln"><img class="mark" src="assets/logo-mark.svg" alt=""><img class="word" src="assets/logo-word.svg" alt=""></div>
+    <div class="lay m headline"><img src="assets/headline.svg" alt=""></div>
+    <div class="lay m logo-st"><img src="assets/logo.png" alt=""></div>
   </div>
 </div>
 <script>
-  var b = document.getElementById('banner');
-
-  // В слоте «по доскролу» баннер должен начинать играть, когда его увидели,
-  // а не когда загрузилась страница. Ждём пересечения с экраном.
-  var started = false;
+  var b = document.getElementById('banner'), started = false;
   function start(){ if (started) return; started = true; b.classList.add('play'); }
   if ('IntersectionObserver' in window){
-    var io = new IntersectionObserver(function(e){
-      if (e[0].isIntersecting){ start(); io.disconnect(); }
-    }, { threshold:.5 });
+    var io = new IntersectionObserver(function(e){ if (e[0].isIntersecting){ start(); io.disconnect(); } }, { threshold:.5 });
     io.observe(b);
-    // В скрытой вкладке наблюдатель молчит и слот остался бы пустым зелёным
-    // прямоугольником — стартуем, когда вкладку открыли.
     document.addEventListener('visibilitychange', function(){ if (!document.hidden) start(); });
-    // В фоновой вкладке наблюдатель и события молчат. Слот РБК сам вставляет
-    // креатив, когда его пора показывать, поэтому через полторы секунды играем
-    // в любом случае — пустой зелёный прямоугольник хуже.
     setTimeout(start, 1500);
   } else { start(); }
-
-  b.addEventListener('click', function(){
-    b.classList.remove('play'); void b.offsetWidth; b.classList.add('play');
-  });
+  b.addEventListener('click', function(){ b.classList.remove('play'); void b.offsetWidth; b.classList.add('play'); });
 </script>
 </body>
 </html>
