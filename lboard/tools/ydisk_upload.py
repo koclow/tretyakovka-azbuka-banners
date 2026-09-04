@@ -5,7 +5,7 @@
 
 Токен — только из окружения, в файлы и вывод не пишется.
 """
-import os, sys, time, pathlib, requests
+import os, sys, time, pathlib, subprocess, requests
 
 API = "https://cloud-api.yandex.net/v1/disk"
 H = {"Authorization": "OAuth " + os.environ["YD_TOKEN"]}
@@ -14,20 +14,20 @@ def mkdir(path):
     r = requests.put(f"{API}/resources", headers=H, params={"path": path})
     if r.status_code not in (201, 409): raise SystemExit(f"mkdir {path}: {r.status_code} {r.text[:200]}")
 
-def upload(local: pathlib.Path, remote: str, tries=6):
-    """Большие файлы: соединение с Диском иногда рвётся — повторяем с паузой, каждый раз с новым href."""
+def upload(local: pathlib.Path, remote: str, tries=8):
+    """Большие файлы шлём curl-ом: если скорость падает ниже 50 КБ/с на минуту — обрыв и новая попытка с новым href."""
     for attempt in range(1, tries + 1):
-        try:
-            r = requests.get(f"{API}/resources/upload", headers=H, params={"path": remote, "overwrite": "true"}, timeout=60); r.raise_for_status()
-            href = r.json()["href"]
-            with open(local, "rb") as f:
-                u = requests.put(href, data=f, timeout=1800)
-            if u.status_code in (201, 202):
-                print(f"  ↑ {remote}  {local.stat().st_size/1048576:.1f} МБ" + (f" (попытка {attempt})" if attempt > 1 else "")); return
-            print(f"  ! {remote}: HTTP {u.status_code}, попытка {attempt}")
-        except (requests.ConnectionError, requests.Timeout) as e:
-            print(f"  ! {remote}: {type(e).__name__}, попытка {attempt}")
-        time.sleep(10 * attempt)
+        r = requests.get(f"{API}/resources/upload", headers=H, params={"path": remote, "overwrite": "true"}, timeout=60); r.raise_for_status()
+        href = r.json()["href"]
+        t0 = time.time()
+        res = subprocess.run(["curl", "-sS", "-o", "/dev/null", "-w", "%{http_code}", "-X", "PUT", "-T", str(local),
+                              "--speed-limit", "51200", "--speed-time", "60", "--max-time", "3600", href], capture_output=True, text=True)
+        code = res.stdout.strip()
+        if res.returncode == 0 and code in ("201", "202"):
+            mb = local.stat().st_size / 1048576; dt = max(time.time() - t0, 1)
+            print(f"  ↑ {remote}  {mb:.1f} МБ за {dt:.0f} с ({mb/dt*1024:.0f} КБ/с)" + (f", попытка {attempt}" if attempt > 1 else ""), flush=True); return
+        print(f"  ! {remote}: curl rc={res.returncode} http={code} {res.stderr.strip()[:80]} — попытка {attempt}", flush=True)
+        time.sleep(15)
     raise SystemExit(f"upload {local}: не удалось за {tries} попыток")
 
 root = "disk:/" + sys.argv[1]
