@@ -1,18 +1,20 @@
 // Рендер HTML-анимации в кадры → ffmpeg → ProRes 4444 MOV.
 // node render.js <file.html> <seconds> <out.mov|out.mp4> [fps=50] [alpha=0] [query, напр. v=B&overlay]
+// SS=2 node render.js … — рендер с двукратным суперсэмплингом (финальное качество)
 const puppeteer = require('puppeteer-core');
 const { spawn } = require('child_process');
 const path = require('path');
 const [,, html, secArg, out, fpsArg = '50', alphaArg = '0', query = ''] = process.argv;
 const sec = +secArg, fps = +fpsArg, alpha = alphaArg === '1';
 const W = 1920, H = 1080, N = Math.round(sec * fps);
+const SS = +process.env.SS || 1;   // SS=2 — суперсэмплинг: кадр 3840×2160, даунскейл Lanczos в ffmpeg
 (async () => {
   const browser = await puppeteer.launch({
     executablePath: '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',
     headless: true, args: ['--hide-scrollbars', '--force-device-scale-factor=1', '--disable-gpu-vsync', '--font-render-hinting=none', '--allow-file-access-from-files']
   });
   const page = await browser.newPage();
-  await page.setViewport({ width: W, height: H, deviceScaleFactor: 1 });
+  await page.setViewport({ width: W, height: H, deviceScaleFactor: SS });
   await page.goto('file://' + path.resolve(html) + '?render' + (query ? '&' + query : ''), { waitUntil: 'load' });
   await page.evaluate(async () => { if (document.fonts) await document.fonts.ready; });
   await page.evaluate(() => window.lbStart && window.lbStart());
@@ -21,7 +23,7 @@ const W = 1920, H = 1080, N = Math.round(sec * fps);
     ? ['-c:v', 'libx264', '-preset', 'slow', '-crf', '20', '-pix_fmt', 'yuv420p', '-movflags', '+faststart']
     : ['-c:v', 'prores_ks', '-profile:v', '4', '-pix_fmt', alpha ? 'yuva444p10le' : 'yuv444p10le', '-vendor', 'apl0'];
   const ff = spawn('ffmpeg', ['-y', '-hide_banner', '-loglevel', 'error', '-f', 'image2pipe', '-framerate', String(fps), '-i', '-',
-    ...codec, '-color_primaries', 'bt709', '-color_trc', 'bt709', '-colorspace', 'bt709', '-r', String(fps), out], { stdio: ['pipe', 'inherit', 'inherit'] });
+    ...(SS > 1 ? ['-vf', `scale=${W}:${H}:flags=lanczos`] : []), ...codec, '-color_primaries', 'bt709', '-color_trc', 'bt709', '-colorspace', 'bt709', '-r', String(fps), out], { stdio: ['pipe', 'inherit', 'inherit'] });
   const t0 = Date.now();
   for (let i = 0; i < N; i++) {
     const t = i * 1000 / fps;
