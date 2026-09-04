@@ -98,31 +98,33 @@
     .play{ animation:softIn .4s ease both; }
     @keyframes softIn{ from{ opacity:0; } to{ opacity:1; } }
   }
+  .lnk{ position:absolute; left:0; top:0; right:0; bottom:0; z-index:9; display:block; }
 </style>
 </head>
 <body>
 <div class="cr" id="cr" role="img" aria-label="Азбука вкуса. В компании художников: соберите коллекцию шедевров">
+  <a class="lnk" id="lnk" href="%banner.reference_mrc_user1%" target="%banner.target%" aria-label="Перейти"></a>
   <div class="box">
-    <div class="lay wide horse"><img src="assets/horse.png" alt=""></div>
-    <div class="lay wide disc"><img src="assets/disc.png" alt=""></div>
-    <div class="lay wide couple"><img src="assets/couple.png" alt=""></div>
-    <div class="lay wide badge"><img src="assets/badge.png" alt=""></div>
+    <div class="lay wide horse"><img src="horse.png" alt=""></div>
+    <div class="lay wide disc"><img src="disc.png" alt=""></div>
+    <div class="lay wide couple"><img src="couple.png" alt=""></div>
+    <div class="lay wide badge"><img src="badge.png" alt=""></div>
     <div class="lay wide headline">
-      <div class="w w1"><img src="assets/w1.svg" alt=""></div>
-      <div class="w w2"><img src="assets/w2.svg" alt=""></div>
-      <div class="w w3"><img src="assets/w3.svg" alt=""></div>
+      <div class="w w1"><img src="w1.png" alt=""></div>
+      <div class="w w2"><img src="w2.png" alt=""></div>
+      <div class="w w3"><img src="w3.png" alt=""></div>
     </div>
-    <div class="lay wide logo-st"><img src="assets/logo.png" alt=""></div>
+    <div class="lay wide logo-st"><img src="logo.png" alt=""></div>
     <div class="lay wide logo-ln">
-      <div class="mark"><img src="assets/logo-mark.svg" alt=""></div>
-      <div class="word"><img src="assets/logo-word.svg" alt=""></div>
+      <div class="mark"><img src="logo_mark.png" alt=""></div>
+      <div class="word"><img src="logo_word.png" alt=""></div>
     </div>
     <div class="lay m headline">
-      <div class="w w1"><img src="assets/w1.svg" alt=""></div>
-      <div class="w w2"><img src="assets/w2.svg" alt=""></div>
-      <div class="w w3"><img src="assets/w3.svg" alt=""></div>
+      <div class="w w1"><img src="w1.png" alt=""></div>
+      <div class="w w2"><img src="w2.png" alt=""></div>
+      <div class="w w3"><img src="w3.png" alt=""></div>
     </div>
-    <div class="lay m logo-st"><img src="assets/logo.png" alt=""></div>
+    <div class="lay m logo-st"><img src="logo.png" alt=""></div>
   </div>
 </div>
 <script>
@@ -151,8 +153,11 @@
     if (document.readyState === 'complete') go(); else window.addEventListener('load', go);
     setTimeout(go, 2500);   // страховка: если какая-то картинка зависла, не ждём её вечно
   }
-  c.addEventListener('click', function(){
-    clearTimeout(doneT); started = false;
+  // Клик: в сети РБК макрос %banner.reference_mrc_user1% заменён на ссылку — уходим по ней.
+  // Пока макрос не подставлен (демо, локальный просмотр) — клик проигрывает заново.
+  var lnk = document.getElementById('lnk');
+  if (lnk.getAttribute('href').charAt(0) === '%') lnk.addEventListener('click', function(e){
+    e.preventDefault(); clearTimeout(doneT); started = false;
     c.classList.remove('play', 'done'); void c.offsetWidth; start();
   });
 </script>

@@ -275,14 +275,15 @@
       <tr><th>Требование ТТ</th><th>Что у нас</th><th></th></tr>
       <tr><td>Billboard 100%×250 Desktop — первый экран и второй по доскролу</td><td>два креатива: А иллюстрация (первый экран), Б фото (по доскролу)</td><td class="ok">✓</td></tr>
       <tr><td>HTML5 корректен при 680–1440 px и шире (десктоп и планшет)</td><td>680 px — ровно макет, до 1440 композиция разъезжается, дальше центр и поля фоном</td><td class="ok">✓</td></tr>
-      <tr><td>Архив билборда ≤ 150 КБ</td><td>А — 75 КБ, Б — 111 КБ</td><td class="ok">✓</td></tr>
+      <tr><td>Архив билборда ≤ 150 КБ</td><td>А — 88 КБ, Б — 122 КБ</td><td class="ok">✓</td></tr>
       <tr><td>Заглушка билборда 680×250 gif/jpg ≤ 85 КБ</td><td><a href="fallback/desktop-illustration.jpg" style="color:inherit">иллюстрация</a> и <a href="fallback/desktop-photo.jpg" style="color:inherit">фото</a></td><td class="ok">✓</td></tr>
       <tr><td>Mobile 100%×250 / 300×250 — файл html5 300×250</td><td>два креатива по макету «iPhone 16» (женщина, мужчина): на 300 px — файл 300×250, в слоте 100%×250 тянутся по ширине</td><td class="ok">✓</td></tr>
-      <tr><td>Архив мобильного ≤ 150 КБ</td><td>женщина — 44 КБ, мужчина — 51 КБ, сплошной 300×250 — 19 КБ</td><td class="ok">✓</td></tr>
+      <tr><td>Архив мобильного ≤ 150 КБ</td><td>женщина — 56 КБ, мужчина — 62 КБ, сплошной 300×250 — 19 КБ</td><td class="ok">✓</td></tr>
       <tr><td>Заглушка мобильного 300×250 gif/jpg/png ≤ 65 КБ</td><td><a href="fallback/mobile-woman.jpg" style="color:inherit">женщина</a>, <a href="fallback/mobile-man.jpg" style="color:inherit">мужчина</a>, <a href="fallback/square-plain.jpg" style="color:inherit">сплошной</a></td><td class="ok">✓</td></tr>
+      <tr><td>Лист «HTML» ТТ: плоский архив, только html/png/jpg (без svg), имена латиницей, html ≤ 65 000 байт, клик по макросу <code>%banner.reference_mrc_user1%</code></td><td>проверяется сборкой <code>build-standalone.py</code>, все четыре архива проходят</td><td class="ok">✓</td></tr>
       <tr><td>Пустые поля — основным (фоновым) цветом баннера</td><td>фон <code>#184936</code> залит на всю ширину слота у всех креативов</td><td class="ok">✓</td></tr>
       <tr><td>Без «ядовитых» цветов в фоне</td><td>тёмно-зелёный фирменный</td><td class="ok">✓</td></tr>
-      <tr><td>L-board (видео MOV ProRes 4444, 1920×1080, 10/15/20 с)</td><td>отдельный формат для эфира телеканала, не HTML — в этой работе не делали</td><td style="color:#c7a15e">—</td></tr>
+      <tr><td>L-board (видео MOV ProRes 4444, 1920×1080, 10/15/20 с)</td><td>отдельный формат для эфира телеканала — в работе, шаблон зон в Figma, рендер в ProRes готов</td><td style="color:#c7a15e">…</td></tr>
     </table>
   </section>
 </div>

@@ -46,21 +46,25 @@
     .play{ animation:softIn .3s ease both; }
     @keyframes softIn{ from{ opacity:0; } to{ opacity:1; } }
   }
+  .lnk{ position:absolute; left:0; top:0; right:0; bottom:0; z-index:9; display:block; }
 </style>
 </head>
 <body>
 <div class="banner play" id="banner" role="img"
      aria-label="Азбука вкуса. Соберите коллекцию шедевров">
+  <a class="lnk" id="lnk" href="%banner.reference_mrc_user1%" target="%banner.target%" aria-label="Перейти"></a>
   <div class="stack">
-    <div class="lay l1"><img src="assets/l1.png" alt=""></div>
-    <div class="lay l2"><img src="assets/l2.png" alt=""></div>
-    <div class="lay l3"><img src="assets/l3.png" alt=""></div>
-    <div class="lay logo"><img src="assets/logo.png" alt=""></div>
+    <div class="lay l1"><img src="l1.png" alt=""></div>
+    <div class="lay l2"><img src="l2.png" alt=""></div>
+    <div class="lay l3"><img src="l3.png" alt=""></div>
+    <div class="lay logo"><img src="logo.png" alt=""></div>
   </div>
 </div>
 <script>
   var b = document.getElementById('banner');
-  b.addEventListener('click', function(){
+  var lnk = document.getElementById('lnk');
+  if (lnk.getAttribute('href').charAt(0) === '%') lnk.addEventListener('click', function(e){
+    e.preventDefault();
     b.classList.remove('play');
     void b.offsetWidth;
     b.classList.add('play');
