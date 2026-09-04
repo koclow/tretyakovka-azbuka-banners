@@ -77,3 +77,17 @@ node render.js ../index.html 20 ../dist/lboard_20s.mov 50 0 "v=A"            # �
 
 Пилот 2 с (`pilot.html`) — 100 кадров за 8 с; 20-секундный файл ≈ 1,5 минуты. Проверка:
 `ffprobe -show_entries stream=codec_name,profile,width,height,r_frame_rate,nb_frames <файл>`.
+
+## Сдача
+
+Финальные файлы — `final/` (вне git): `lboard_C_20s.mov`, `lboard_C_15s.mov`, `lboard_C_10s.mov`
+(ProRes 4444, 1920×1080, 50p, ровно 1000/750/500 кадров, без звука), `preview_C_20s.mp4` и
+`README.txt` для заказчика. Выкладка на Яндекс.Диск с публикацией ссылки:
+
+```bash
+YD_TOKEN=$(secret get "Яндекс.Метрика — OAuth-токен 3.09.2026" --field password) \
+python3 tools/ydisk_upload.py "Азбука вкуса × Третьяковка — материалы для РБК" \
+  "1 · HTML-баннеры (сайт РБК)=../Отправка РБК" "2 · L-board (эфир телеканала)=final"
+```
+
+Повторный запуск перезаписывает файлы в той же папке, ссылка не меняется.
