@@ -19,7 +19,8 @@
   .disc  { left:1169px; top:595px; width:357px; }
   .couple{ left:1633px; top:741px; width:190px; }
   .badge { left:104px;  top:108px; width:316.5px; }
-  .h     { left:106px;  width:307.5px; }
+  .h     { left:106px;  width:307.5px; aspect-ratio:308/171; }
+  .h img { height:100%; }
   .sub   { left:105px;  top:395px; width:462px; }
   .logo  { left:104px;  top:825px; width:385px; }
 
@@ -74,9 +75,9 @@
   /* ПОКОЙ — вариант C = A + белый диагональный блик по плашке «в компании художников».
      Полоса наклонена, идёт из левого нижнего угла плашки в правый верхний; в середине разгон,
      края мягкие (cubic-bezier(.65,0,.35,1)), проход 1,6 с, два прохода — на 7-й и на 13-й секунде.
-     Маска — badge.png, поэтому блик ложится и на золотую подложку, и на текст. */
+     Маска — badge.svg, поэтому блик ложится и на золотую подложку, и на текст. */
   .shine{ position:absolute; left:104px; top:108px; width:316.5px; height:43px; pointer-events:none;
-          -webkit-mask:url(assets/badge.png) 0 0 / 100% 100% no-repeat; mask:url(assets/badge.png) 0 0 / 100% 100% no-repeat; }
+          -webkit-mask:url(assets/svg/badge.svg) 0 0 / 100% 100% no-repeat; mask:url(assets/svg/badge.svg) 0 0 / 100% 100% no-repeat; }
   .shine::before{ content:""; position:absolute; left:50%; top:50%; width:150px; height:420px;
           margin-left:-75px; margin-top:-210px;
           background:linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,.10) 28%,
@@ -107,12 +108,12 @@
     <div class="lay disc"><img src="assets/disc.png" alt=""></div>
     <div class="lay couple"><img src="assets/couple.png" alt=""></div>
   </div>
-  <div class="lay badge"><img src="assets/badge.png" alt=""></div>
-  <div class="lay h h1" style="top:194.0px"><img src="assets/headline_l1.png" alt=""></div>
-  <div class="lay h h2" style="top:264.0px"><img src="assets/headline_l2.png" alt=""></div>
-  <div class="lay h h3" style="top:322.0px"><img src="assets/headline_l3.png" alt=""></div>
-  <div class="lay sub"><img src="assets/sub.png" alt=""></div>
-  <div class="lay logo"><img src="assets/logo.png" alt=""></div>
+  <div class="lay badge"><img src="assets/svg/badge.svg" alt=""></div>
+  <div class="lay h h1" style="top:194px"><img src="assets/svg/headline_l1.svg" alt=""></div>
+  <div class="lay h h2" style="top:194px"><img src="assets/svg/headline_l2.svg" alt=""></div>
+  <div class="lay h h3" style="top:194px"><img src="assets/svg/headline_l3.svg" alt=""></div>
+  <div class="lay sub"><img src="assets/svg/sub.svg" alt=""></div>
+  <div class="lay logo"><img src="assets/svg/logo.svg" alt=""></div>
   <div class="shine"></div>
   <div class="ov air">ЭФИР<br>здесь идёт программа</div>
   <div class="ov tick">бегущая строка РБК</div>
