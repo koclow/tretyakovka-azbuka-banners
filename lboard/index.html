@@ -28,7 +28,15 @@
   .h img { height:100%; }
   .sub   { left:105px;  top:395px; width:462px; }
   .logo  { left:104px;  top:825px; width:385px; }
-  .mark  { left:104px;  top:922px; width:464.0px; }   /* маркировка: РЕКЛАМА • ООО «Городской супермаркет», ИНН — правка заказчика 08.09 */
+  .mark  { left:104px;  top:922px; width:464.0px; }
+
+  /* Раскладка 2 (?l=2, макет 2077:456): круг и пара в левой колонке под текстом на общей линии низа 940,
+     конь слева в нижней полосе (10 % под строкой), логотип и маркировка справа по правому полю 1816. */
+  .L2 .disc  { left:104px;  top:684px; width:256px; height:256px; }
+  .L2 .couple{ left:417px;  top:600px; width:150px; height:340px; }
+  .L2 .horse { left:660px;  top:726px; width:270px; height:254px; }
+  .L2 .logo  { left:1431px; top:828px; }
+  .L2 .mark  { left:1352px; top:900px; }   /* маркировка: РЕКЛАМА • ООО «Городской супермаркет», ИНН — правка заказчика 08.09 */
 
   /* до старта всё спрятано */
   .js .stage:not(.play) .lay{ opacity:0; }
@@ -132,6 +140,7 @@
   var v = (/[?&]v=([ABC])/.exec(q) || [0, 'A'])[1];
   st.classList.add('v' + v);
   if (/[?&]overlay/.test(q)) st.classList.add('overlay');
+  if (/[?&]l=2/.test(q)) st.classList.add('L2');
   window.lbStart = function(){ st.classList.add('play'); };
   var at = /[?&]at=(\d+)/.exec(q);
   if (at){ st.classList.add('play'); void st.offsetWidth; document.getAnimations().forEach(function(a){ a.pause(); a.currentTime = +at[1]; }); }
