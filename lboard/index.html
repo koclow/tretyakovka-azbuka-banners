@@ -15,11 +15,13 @@
   .lay img{ display:block; width:100%; height:auto; }
 
   /* геометрия по макету 2037:987 (px кадра 1920×1080) */
-  /* Правка РБК 08.09: значки не должны уходить под эфир (до y 724) и бегущую строку (от y 960).
-     Полоса 236 px → значки высотой 208 с отступом 14, три штуки с равными промежутками по 640…1824. */
-  .horse { left:809px;  top:738px; width:221px;  height:208px; }
-  .disc  { left:1199px; top:738px; width:208px;  height:208px; }
-  .couple{ left:1576px; top:738px; width:80px;   height:208px; }
+  /* Правка РБК 08.09 (v3): значки крупнее, заход за край не больше 10 % высоты значка.
+     Видимая полоса 724…955 (эфир сверху, бегущая строка снизу по скриншоту РБК).
+     Круг: 257 px, верх 698 — 10 % под эфиром, низ на кромке строки.
+     Конь и пара: 254 px, верх 726 — 10 % низа под строкой. Равные промежутки по 640…1824. */
+  .horse { left:780px;  top:726px; width:270px;  height:254px; }
+  .disc  { left:1190px; top:698px; width:257px;  height:257px; }
+  .couple{ left:1587px; top:726px; width:97.5px; height:254px; }
   .horse img, .disc img, .couple img{ height:100%; width:auto; }
   .badge { left:104px;  top:108px; width:316.5px; }
   .h     { left:106px;  width:307.5px; aspect-ratio:308/171; }
