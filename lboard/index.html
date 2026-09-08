@@ -38,17 +38,19 @@
   .L2 .logo  { left:1431px; top:828px; }
   .L2 .mark  { left:1352px; top:900px; }
 
-  /* Раскладка 3 (?l=3, макет 2077:839): иллюстрации кластером вверху левой колонки,
-     плашка и заголовок в углу L, подзаголовок и логотип в нижней полосе одной строкой. */
-  .L3 .disc  { left:104px; top:56px;  width:256px; height:256px; }
-  .L3 .couple{ left:410px; top:60px;  width:166px; height:376px; }
-  .L3 .horse { left:104px; top:372px; width:300px; height:282px; }
-  .L3 .badge { top:683px; }
-  .L3 .shine { top:683px; }   /* блик едет за плашкой */
-  .L3 .h     { top:763px !important; }
-  .L3 .sub   { left:640px; top:784px; }
-  .L3 .logo  { left:1431px; top:828px; }
-  .L3 .mark  { left:1352px; top:900px; }   /* маркировка: РЕКЛАМА • ООО «Городской супермаркет», ИНН — правка заказчика 08.09 */
+  /* Раскладка 3 (?l=3, макет 2077:839, утверждён Никитой 08.09): иллюстрации кластером вверху
+     левой колонки, плашка и заголовок в углу L, подзаголовок от кромки эфира, логотип справа.
+     Пара опущена с y 30 на 56 и логотип сдвинут к правому полю 1816 — иначе РБК отрезает. */
+  .L3 .disc  { left:114px; top:86px;  width:256px; height:256px; }
+  .L3 .couple{ left:410px; top:56px;  width:166px; height:376px; }
+  .L3 .horse { left:164px; top:362px; width:300px; height:282px; }
+  .L3 .badge { left:120px; top:683px; }
+  .L3 .shine { left:120px; top:683px; }
+  .L3 .h     { left:122px; top:763px !important; }
+  .L3 .sub   { left:600px; top:789px; width:468.0px; }
+  .L3 .sub img{ content:url(assets/svg/sub_l3.svg); }   /* в этом макете подзаголовок переверстан в коробку 480 */
+  .L3 .logo  { left:1431px; top:832px; }
+  .L3 .mark  { left:1350px; top:912px; }   /* маркировка: РЕКЛАМА • ООО «Городской супермаркет», ИНН — правка заказчика 08.09 */
 
   /* до старта всё спрятано */
   .js .stage:not(.play) .lay{ opacity:0; }
