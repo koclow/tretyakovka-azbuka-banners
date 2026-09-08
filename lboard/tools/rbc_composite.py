@@ -41,8 +41,10 @@ while True:
             used += 1
             # прямоугольник программы по снятой с их ролика таблице (левый край 30 px/кадр, низ 18 px/кадр),
             # разжатие — зеркало сжатия; в переходах перекрываем ещё 2 px, чтобы не торчал край старого баннера
-            if f < F0 + SQ: left, bottom = SQUEEZE[f - F0]; left -= 2; bottom += 2
-            elif f >= F1: left, bottom = SQUEEZE[SQ - (f - F1)]; left -= 2; bottom += 2
+            if f < F0 + SQ:                       # сжатие: левый край с кадра 53 по 29,6 px, низ по 17,7 px до кадра 70
+                left = max(LEFT, round(96 + 29.6 * (f - 53))) - 2; bottom = min(H, round(725 + 17.7 * (70 - f))) + 2
+            elif f >= F1:                          # разжатие: оба края с кадра 530, 30 и 18 px за кадр
+                left = max(LEFT, round(599 - 30 * (f - F1))) - 2; bottom = min(H, round(725 + 18 * (f - F1))) + 2
             else: left, bottom = WIN_LEFT, WIN_BOTTOM
             outf = T.copy()
             # L-область баннера: колонка слева от программы и полоса под ней, до бегущей строки
