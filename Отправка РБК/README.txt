@@ -12,8 +12,9 @@
 Клик — по макросу %banner.reference_mrc_user1% с target=%banner.target% (лист «HTML» ТТ).
 Билборды тянутся от 680 до 1920+ px, фон #184936 (при неполном растяжении поля заливаются им).
 Анимация около 3 с, затем статичный финальный кадр; звука и внешних запросов нет.
+Маркировка «РЕКЛАМА • ООО «ГОРОДСКОЙ СУПЕРМАРКЕТ», ИНН 7705466989» стоит на креативах и заглушках.
 
-billboard_1_illustration.zip — 88 КБ; заглушка billboard_1_illustration_680x250.jpg — 62 КБ
-billboard_2_photo.zip — 122 КБ; заглушка billboard_2_photo_680x250.jpg — 56 КБ
-mobile_1_woman.zip — 56 КБ; заглушка mobile_1_woman_300x250.jpg — 34 КБ
-mobile_2_man.zip — 62 КБ; заглушка mobile_2_man_300x250.jpg — 34 КБ
+billboard_1_illustration.zip — 110 КБ; заглушка billboard_1_illustration_680x250.jpg — 58 КБ
+billboard_2_photo.zip — 133 КБ; заглушка billboard_2_photo_680x250.jpg — 50 КБ
+mobile_1_woman.zip — 65 КБ; заглушка mobile_1_woman_300x250.jpg — 30 КБ
+mobile_2_man.zip — 72 КБ; заглушка mobile_2_man_300x250.jpg — 29 КБ

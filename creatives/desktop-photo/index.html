@@ -26,6 +26,9 @@
              aspect-ratio:496.488 / 97.544; }
   .lockup  { left:calc(30px + var(--d) * .02632); top:calc(178px + var(--d) * .00789); width:calc(217px + var(--d) * .12763);
              aspect-ratio:362 / 43.5741; }
+  /* маркировка (закон о рекламе) — строкой у низа зелёной панели, по левому краю набора */
+  .mk      { left:calc(30px + var(--d) * .02632); top:232px; width:321px; }
+  .mk img  { display:block; width:100%; height:auto; }
   .photo{ position:absolute; top:0; bottom:0; right:0; left:58.333%; overflow:hidden; }
   .photo img{ display:block; width:100%; height:100%; object-fit:cover; object-position:45% 50%; }
 
@@ -43,6 +46,7 @@
     .box{ width:300px; }
     .headline{ left:24px; top:74px; width:252px; }
     .lockup  { left:24px; top:174px; width:220px; }
+    .mk{ left:24px; }
   }
 
   /* до старта слои спрятаны: никакой вспышки готового кадра перед появлением */
@@ -56,6 +60,8 @@
   .play .lk1  { animation:smearIn 1.0s var(--ease-out) 1.15s both; }
   .play .lk2  { animation:smearIn 1.0s var(--ease-out) 1.27s both; }
   .play .lk3  { animation:smearIn 1.0s var(--ease-out) 1.37s both; }
+  .play .mk   { animation:fadeIn  1.0s var(--ease-out) 1.80s both; }
+  @keyframes fadeIn { from{ opacity:0; } to{ opacity:1; } }
   @keyframes photoIn{ from{ opacity:0; transform:translateX(14px); } to{ opacity:1; transform:none; } }
   @keyframes smearIn{ from{ opacity:0; transform:translateX(-10px) scaleX(1.03); filter:blur(4px); }
                       to  { opacity:1; transform:none; filter:blur(0); } }
@@ -89,6 +95,7 @@
       <div class="lk lk2"><img src="lk2.png" alt=""></div>
       <div class="lk lk3"><img src="lk3.png" alt=""></div>
     </div>
+    <div class="lay mk"><img src="mk.png" alt="Реклама. ООО «Городской супермаркет», ИНН 7705466989"></div>
   </div>
 </div>
 <script>

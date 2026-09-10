@@ -26,8 +26,11 @@
   .badge   { left:calc(23px + var(--d) * .02237); top:calc(30px - var(--d) * .00526); width:216px; }
   .headline{ left:calc(24px + var(--d) * .02329); top:calc(60px + var(--d) * .01632); width:272px;
              aspect-ratio:496.488 / 97.544; }
-  .logo-st { left:calc(23px + var(--d) * .02237); top:calc(180px + var(--d) * .01316); width:123px; }
-  .logo-ln { left:calc(23px + var(--d) * .02237); top:calc(180px + var(--d) * .01868); width:210.3px; height:31.5px; display:none; }
+  .logo-st { left:calc(23px + var(--d) * .02237); top:calc(174px + var(--d) * .01316); width:123px; }
+  .logo-ln { left:calc(23px + var(--d) * .02237); top:calc(180px + var(--d) * .0105); width:210.3px; height:31.5px; display:none; }
+  /* маркировка (закон о рекламе): до 900 px — в две строки под логотипом, дальше — в строку у низа */
+  .mk   { left:calc(23px + var(--d) * .02237); top:221px; width:150px; }
+  .mk1  { display:none; top:232px; width:321px; }
   .logo-ln .mark{ position:absolute; left:0; top:0; width:38.1px; }
   .logo-ln .word{ position:absolute; left:48.9px; top:3.2px; width:161.4px; }
   .logo-ln img{ display:block; width:100%; height:auto; }
@@ -44,7 +47,7 @@
   /* заголовок растёт только после 960 px — иначе к 800 px упирается в голову коня */
   @media (min-width:960px){ .headline{ width:calc(272px + (100cqw - 960px) * .37563); } }
   /* логотип: до 900 px — макетный, в две строки; дальше — в строку, как в макете 1440 */
-  @media (min-width:900px){ .logo-st{ display:none; } .logo-ln{ display:block; } }
+  @media (min-width:900px){ .logo-st{ display:none; } .logo-ln{ display:block; } .mk2{ display:none; } .mk1{ display:block; } }
 
   /* ——— слот чуть уже 680 (у РБК гуттеры съедают 16 px): макет 680 по центру, края подрезаются ——— */
   .m{ display:none; }
@@ -58,6 +61,7 @@
     .box{ width:300px; }
     .m.headline{ left:24px; top:74px; width:252px; }
     .m.logo-st { left:24px; top:174px; width:123px; }
+    .mk{ left:24px; }
   }
 
   /* ——— до старта слои спрятаны: никакой вспышки готового кадра перед появлением ——— */
@@ -75,6 +79,8 @@
   .play .logo-st { animation:smearIn 1.1s var(--ease-out) 1.40s both; }
   .play .logo-ln .mark{ animation:smearIn 1.0s var(--ease-out) 1.40s both; }
   .play .logo-ln .word{ animation:smearIn 1.0s var(--ease-out) 1.52s both; }
+  .play .mk      { animation:fadeIn  1.0s var(--ease-out) 1.90s both; }
+  @keyframes fadeIn { from{ opacity:0; } to{ opacity:1; } }
 
   @keyframes riseUp { from{ opacity:0; transform:translateY(18px); } to{ opacity:1; transform:none; } }
   @keyframes discIn { from{ opacity:0; transform:translateY(14px) scale(.98); } to{ opacity:1; transform:none; } }
@@ -125,6 +131,8 @@
       <div class="w w3"><img src="w3.png" alt=""></div>
     </div>
     <div class="lay m logo-st"><img src="logo.png" alt=""></div>
+    <div class="lay mk mk2"><img src="mk2.png" alt="Реклама. ООО «Городской супермаркет», ИНН 7705466989"></div>
+    <div class="lay mk mk1"><img src="mk1.png" alt=""></div>
   </div>
 </div>
 <script>
