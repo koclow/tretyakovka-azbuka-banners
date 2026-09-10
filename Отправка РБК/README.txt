@@ -14,7 +14,7 @@
 Анимация около 3 с, затем статичный финальный кадр; звука и внешних запросов нет.
 Маркировка «РЕКЛАМА • ООО «ГОРОДСКОЙ СУПЕРМАРКЕТ», ИНН 7705466989» стоит на креативах и заглушках.
 
-billboard_1_illustration.zip — 110 КБ; заглушка billboard_1_illustration_680x250.jpg — 58 КБ
-billboard_2_photo.zip — 133 КБ; заглушка billboard_2_photo_680x250.jpg — 50 КБ
-mobile_1_woman.zip — 65 КБ; заглушка mobile_1_woman_300x250.jpg — 30 КБ
-mobile_2_man.zip — 72 КБ; заглушка mobile_2_man_300x250.jpg — 29 КБ
+billboard_1_illustration.zip — 110 КБ; заглушка billboard_1_illustration_680x250.jpg — 79 КБ
+billboard_2_photo.zip — 133 КБ; заглушка billboard_2_photo_680x250.jpg — 78 КБ
+mobile_1_woman.zip — 65 КБ; заглушка mobile_1_woman_300x250.jpg — 46 КБ
+mobile_2_man.zip — 72 КБ; заглушка mobile_2_man_300x250.jpg — 45 КБ

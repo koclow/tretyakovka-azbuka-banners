@@ -14,7 +14,7 @@ const SET = { 'desktop-illustration': [680, 250, 85], 'desktop-photo': [680, 250
     execFileSync('python3', ['-c', `
 from PIL import Image; import io
 im = Image.open('${png}').convert('RGB').resize((${w}, ${h}), Image.LANCZOS)
-for q in range(92, 60, -2):
+for q in range(97, 60, -1):
     buf = io.BytesIO(); im.save(buf, 'JPEG', quality=q, optimize=True, subsampling=0)
     if buf.tell() <= ${lim} * 1024: break
 open('${path.join(ROOT, 'fallback', n + '.jpg')}', 'wb').write(buf.getvalue()); print('${n}', q, buf.tell())`], { stdio: 'inherit' });
